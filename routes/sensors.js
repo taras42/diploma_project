@@ -1,9 +1,22 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET sensors listing. */
-router.get('/', function(req, res) {
-  res.send('respond with a resource');
+/* add sensor */
+
+router.post('/add', function(req, res) {
+  res.send('respond with a resource for sensors');
+});
+
+/* remove sensor */
+
+router.post('/remove', function(req, res) {
+  res.send('respond with a resource for sensors');
+});
+
+/* edit sensor */
+
+router.post('/edit', function(req, res) {
+  res.send('respond with a resource for sensors');
 });
 
 module.exports = router;

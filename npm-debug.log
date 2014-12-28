@@ -1,0 +1,266 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'install', 'knex', '-g' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.35
+4 verbose node symlink /usr/bin/node
+5 verbose cache add [ 'knex', null ]
+6 verbose cache add name=undefined spec="knex" args=["knex",null]
+7 verbose parsed url { protocol: null,
+7 verbose parsed url   slashes: null,
+7 verbose parsed url   auth: null,
+7 verbose parsed url   host: null,
+7 verbose parsed url   port: null,
+7 verbose parsed url   hostname: null,
+7 verbose parsed url   hash: null,
+7 verbose parsed url   search: null,
+7 verbose parsed url   query: null,
+7 verbose parsed url   pathname: 'knex',
+7 verbose parsed url   path: 'knex',
+7 verbose parsed url   href: 'knex' }
+8 silly lockFile ab59b290-knex knex
+9 verbose lock knex /home/scifithief/.npm/ab59b290-knex.lock
+10 silly lockFile ab59b290-knex knex
+11 silly lockFile ab59b290-knex knex
+12 verbose addNamed [ 'knex', '' ]
+13 verbose addNamed [ null, '*' ]
+14 silly lockFile c7bf951c-knex knex@
+15 verbose lock knex@ /home/scifithief/.npm/c7bf951c-knex.lock
+16 silly addNameRange { name: 'knex', range: '*', hasData: false }
+17 verbose request where is /knex
+18 verbose request registry https://registry.npmjs.org/
+19 verbose request id 10dbf3b196350290
+20 verbose url raw /knex
+21 verbose url resolving [ 'https://registry.npmjs.org/', './knex' ]
+22 verbose url resolved https://registry.npmjs.org/knex
+23 verbose request where is https://registry.npmjs.org/knex
+24 info trying registry request attempt 1 at 21:18:03
+25 verbose etag "B13CE06BM9LMVMLXHJU0XJYC5"
+26 http GET https://registry.npmjs.org/knex
+27 http 304 https://registry.npmjs.org/knex
+28 silly registry.get cb [ 304,
+28 silly registry.get   { date: 'Sun, 28 Dec 2014 19:18:03 GMT',
+28 silly registry.get     server: 'Apache',
+28 silly registry.get     via: '1.1 varnish',
+28 silly registry.get     'last-modified': 'Sun, 28 Dec 2014 19:18:03 GMT',
+28 silly registry.get     'cache-control': 'max-age=60',
+28 silly registry.get     etag: '"B13CE06BM9LMVMLXHJU0XJYC5"',
+28 silly registry.get     age: '0',
+28 silly registry.get     'x-served-by': 'cache-fra1234-FRA',
+28 silly registry.get     'x-cache': 'HIT',
+28 silly registry.get     'x-cache-hits': '1',
+28 silly registry.get     'x-timer': 'S1419794283.390600,VS0,VE102',
+28 silly registry.get     vary: 'Accept',
+28 silly registry.get     'content-length': '0',
+28 silly registry.get     'keep-alive': 'timeout=10, max=50',
+28 silly registry.get     connection: 'Keep-Alive' } ]
+29 verbose etag https://registry.npmjs.org/knex from cache
+30 silly addNameRange number 2 { name: 'knex', range: '*', hasData: true }
+31 silly addNameRange versions [ 'knex',
+31 silly addNameRange   [ '0.0.0',
+31 silly addNameRange     '0.0.1',
+31 silly addNameRange     '0.0.2',
+31 silly addNameRange     '0.0.3',
+31 silly addNameRange     '0.0.5',
+31 silly addNameRange     '0.1.0',
+31 silly addNameRange     '0.1.1',
+31 silly addNameRange     '0.1.2',
+31 silly addNameRange     '0.1.3',
+31 silly addNameRange     '0.1.4',
+31 silly addNameRange     '0.1.5',
+31 silly addNameRange     '0.1.6',
+31 silly addNameRange     '0.1.7',
+31 silly addNameRange     '0.1.8',
+31 silly addNameRange     '0.2.0',
+31 silly addNameRange     '0.2.1',
+31 silly addNameRange     '0.2.2',
+31 silly addNameRange     '0.2.3',
+31 silly addNameRange     '0.2.4',
+31 silly addNameRange     '0.2.5',
+31 silly addNameRange     '0.2.6',
+31 silly addNameRange     '0.4.0',
+31 silly addNameRange     '0.4.1',
+31 silly addNameRange     '0.4.2',
+31 silly addNameRange     '0.2.7-alpha',
+31 silly addNameRange     '0.4.3',
+31 silly addNameRange     '0.4.4',
+31 silly addNameRange     '0.4.5',
+31 silly addNameRange     '0.4.6',
+31 silly addNameRange     '0.4.7',
+31 silly addNameRange     '0.4.8',
+31 silly addNameRange     '0.4.9',
+31 silly addNameRange     '0.4.10',
+31 silly addNameRange     '0.4.11',
+31 silly addNameRange     '0.4.12',
+31 silly addNameRange     '0.4.13',
+31 silly addNameRange     '0.5.0',
+31 silly addNameRange     '0.5.1',
+31 silly addNameRange     '0.5.2',
+31 silly addNameRange     '0.5.3',
+31 silly addNameRange     '0.5.4',
+31 silly addNameRange     '0.5.5',
+31 silly addNameRange     '0.5.6',
+31 silly addNameRange     '0.5.7',
+31 silly addNameRange     '0.5.8',
+31 silly addNameRange     '0.5.9',
+31 silly addNameRange     '0.5.10',
+31 silly addNameRange     '0.5.11',
+31 silly addNameRange     '0.5.12',
+31 silly addNameRange     '0.5.13',
+31 silly addNameRange     '0.5.14',
+31 silly addNameRange     '0.5.15',
+31 silly addNameRange     '0.6.0',
+31 silly addNameRange     '0.6.1',
+31 silly addNameRange     '0.6.2',
+31 silly addNameRange     '0.6.3',
+31 silly addNameRange     '0.6.4',
+31 silly addNameRange     '0.6.5',
+31 silly addNameRange     '0.6.6',
+31 silly addNameRange     '0.6.7',
+31 silly addNameRange     '0.6.8',
+31 silly addNameRange     '0.6.9',
+31 silly addNameRange     '0.6.10',
+31 silly addNameRange     '0.6.11',
+31 silly addNameRange     '0.6.12',
+31 silly addNameRange     '0.6.13',
+31 silly addNameRange     '0.6.14',
+31 silly addNameRange     '0.6.15',
+31 silly addNameRange     '0.6.16',
+31 silly addNameRange     '0.6.17',
+31 silly addNameRange     '0.6.18',
+31 silly addNameRange     '0.6.19',
+31 silly addNameRange     '0.6.20',
+31 silly addNameRange     '0.6.21',
+31 silly addNameRange     '0.6.22',
+31 silly addNameRange     '0.5.16',
+31 silly addNameRange     '0.7.0',
+31 silly addNameRange     '0.7.1',
+31 silly addNameRange     '0.7.2',
+31 silly addNameRange     '0.7.3' ] ]
+32 verbose addNamed [ 'knex', '0.7.3' ]
+33 verbose addNamed [ '0.7.3', '0.7.3' ]
+34 silly lockFile c74436cc-knex-0-7-3 knex@0.7.3
+35 verbose lock knex@0.7.3 /home/scifithief/.npm/c74436cc-knex-0-7-3.lock
+36 silly lockFile c74436cc-knex-0-7-3 knex@0.7.3
+37 silly lockFile c74436cc-knex-0-7-3 knex@0.7.3
+38 silly lockFile c7bf951c-knex knex@
+39 silly lockFile c7bf951c-knex knex@
+40 silly resolved [ { name: 'knex',
+40 silly resolved     version: '0.7.3',
+40 silly resolved     description: 'A batteries-included SQL query & schema builder for Postgres, MySQL and SQLite3 and the Browser',
+40 silly resolved     main: 'knex.js',
+40 silly resolved     directories: { test: 'test' },
+40 silly resolved     browser:
+40 silly resolved      { './lib/dialects/oracle': false,
+40 silly resolved        './lib/dialects/maria': false,
+40 silly resolved        './lib/dialects/mysql': false,
+40 silly resolved        './lib/dialects/mysql2': false,
+40 silly resolved        './lib/dialects/postgres': false,
+40 silly resolved        './lib/dialects/sqlite3': false,
+40 silly resolved        sqlite3: false },
+40 silly resolved     dependencies:
+40 silly resolved      { bluebird: '^2.0.0',
+40 silly resolved        chalk: '~0.5.1',
+40 silly resolved        commander: '^2.2.0',
+40 silly resolved        'generic-pool-redux': '~0.1.0',
+40 silly resolved        inherits: '~2.0.1',
+40 silly resolved        interpret: '^0.3.2',
+40 silly resolved        liftoff: '~0.13.2',
+40 silly resolved        lodash: '~2.4.0',
+40 silly resolved        minimist: '~1.1.0',
+40 silly resolved        mkdirp: '^0.5.0',
+40 silly resolved        'readable-stream': '^1.1.12',
+40 silly resolved        tildify: '~1.0.0' },
+40 silly resolved     devDependencies:
+40 silly resolved      { through: '^2.3.4',
+40 silly resolved        browserify: '~5.12.1',
+40 silly resolved        gulp: '^3.6.2',
+40 silly resolved        'gulp-bump': '^0.1.8',
+40 silly resolved        'gulp-git': '~0.5.0',
+40 silly resolved        'gulp-shell': '^0.2.5',
+40 silly resolved        'gulp-jshint': '^1.8.4',
+40 silly resolved        chai: '^1.9.1',
+40 silly resolved        'chai-as-promised': '^4.1.0',
+40 silly resolved        jshint: '~2.5.1',
+40 silly resolved        mocha: '^1.20.0',
+40 silly resolved        mysql: '^2.3.1',
+40 silly resolved        'node-uuid': '~1.4.0',
+40 silly resolved        pg: '^3.2.0',
+40 silly resolved        'pg-query-stream': '^0.6.0',
+40 silly resolved        rimraf: '2.x',
+40 silly resolved        sinon: '^1.10.0',
+40 silly resolved        'sinon-chai': '^2.5.0',
+40 silly resolved        sqlite3: '~3.0.2',
+40 silly resolved        mariasql: '~0.1.21',
+40 silly resolved        mysql2: '~0.12.1',
+40 silly resolved        istanbul: '~0.3.0',
+40 silly resolved        coveralls: '~2.11.1' },
+40 silly resolved     scripts:
+40 silly resolved      { build: 'gulp build',
+40 silly resolved        test: 'npm run jshint && istanbul --config=test/.istanbul.yml cover _mocha -- --check-leaks -t 5000 -b -R spec test/index.js',
+40 silly resolved        coveralls: 'cat ./test/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js',
+40 silly resolved        jshint: 'gulp jshint',
+40 silly resolved        'release:patch': 'gulp jshint && npm test && gulp build && gulp bump --type patch && gulp release',
+40 silly resolved        'release:minor': 'gulp jshint && npm test && gulp build && gulp bump --type minor && gulp release' },
+40 silly resolved     bin: { knex: './lib/bin/cli.js' },
+40 silly resolved     repository: { type: 'git', url: 'git://github.com/tgriesser/knex.git' },
+40 silly resolved     keywords: [ 'sql', 'query', 'postgresql', 'mysql', 'sqlite3' ],
+40 silly resolved     author: { name: 'Tim Griesser', url: 'https://github.com/tgriesser' },
+40 silly resolved     files:
+40 silly resolved      [ 'README.md',
+40 silly resolved        'lib/*',
+40 silly resolved        'browser/*',
+40 silly resolved        'gulpfile.js',
+40 silly resolved        'knex.js',
+40 silly resolved        'LICENSE' ],
+40 silly resolved     license: 'MIT',
+40 silly resolved     bugs: { url: 'https://github.com/tgriesser/knex/issues' },
+40 silly resolved     homepage: 'https://github.com/tgriesser/knex',
+40 silly resolved     _id: 'knex@0.7.3',
+40 silly resolved     dist:
+40 silly resolved      { shasum: '66036d81c6d6ffea6beaefc2afbf875a64da423a',
+40 silly resolved        tarball: 'http://registry.npmjs.org/knex/-/knex-0.7.3.tgz' },
+40 silly resolved     _from: 'knex@',
+40 silly resolved     _npmVersion: '1.3.21',
+40 silly resolved     _npmUser: { name: 'tgriesser', email: 'tgriesser10@gmail.com' },
+40 silly resolved     maintainers: [ [Object] ],
+40 silly resolved     _shasum: '66036d81c6d6ffea6beaefc2afbf875a64da423a',
+40 silly resolved     _resolved: 'https://registry.npmjs.org/knex/-/knex-0.7.3.tgz',
+40 silly resolved     readme: 'ERROR: No README data found!' } ]
+41 info install knex@0.7.3 into /usr/lib
+42 info installOne knex@0.7.3
+43 verbose lib/node_modules/knex unbuild
+44 verbose tar unpack /home/scifithief/.npm/knex/0.7.3/package.tgz
+45 silly lockFile 380e0fff-tar-usr-lib-node-modules-knex tar:///usr/lib/node_modules/knex
+46 verbose lock tar:///usr/lib/node_modules/knex /home/scifithief/.npm/380e0fff-tar-usr-lib-node-modules-knex.lock
+47 silly lockFile fd0688a9-thief-npm-knex-0-7-3-package-tgz tar:///home/scifithief/.npm/knex/0.7.3/package.tgz
+48 verbose lock tar:///home/scifithief/.npm/knex/0.7.3/package.tgz /home/scifithief/.npm/fd0688a9-thief-npm-knex-0-7-3-package-tgz.lock
+49 silly gunzTarPerm modes [ '775', '664' ]
+50 error Error: EACCES, mkdir '/usr/lib/node_modules/knex'
+50 error  { [Error: EACCES, mkdir '/usr/lib/node_modules/knex']
+50 error   errno: 3,
+50 error   code: 'EACCES',
+50 error   path: '/usr/lib/node_modules/knex',
+50 error   fstream_type: 'Directory',
+50 error   fstream_path: '/usr/lib/node_modules/knex',
+50 error   fstream_class: 'DirWriter',
+50 error   fstream_stack:
+50 error    [ '/usr/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23',
+50 error      '/usr/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53',
+50 error      'Object.oncomplete (fs.js:108:15)' ] }
+51 error Please try running this command again as root/Administrator.
+52 error System Linux 3.13.0-32-generic
+53 error command "/usr/bin/node" "/usr/bin/npm" "install" "knex" "-g"
+54 error cwd /home/scifithief/projects/diploma_project
+55 error node -v v0.10.35
+56 error npm -v 1.4.28
+57 error path /usr/lib/node_modules/knex
+58 error fstream_path /usr/lib/node_modules/knex
+59 error fstream_type Directory
+60 error fstream_class DirWriter
+61 error code EACCES
+62 error errno 3
+63 error stack Error: EACCES, mkdir '/usr/lib/node_modules/knex'
+64 error fstream_stack /usr/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23
+64 error fstream_stack /usr/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53
+64 error fstream_stack Object.oncomplete (fs.js:108:15)
+65 verbose exit [ 3, true ]
