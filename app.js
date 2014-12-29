@@ -1,10 +1,10 @@
 var express = require('express');
 var path = require('path');
+var consolidate = require('consolidate');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 
 // Routes
 
@@ -15,8 +15,9 @@ var sensors = require('./routes/sensors');
 var app = express();
 
 // view engine setup
+app.engine('html', consolidate.underscore);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'html');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
