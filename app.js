@@ -1,6 +1,6 @@
 var express = require('express');
 var path = require('path');
-var consolidate = require('consolidate');
+var cons = require('consolidate');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -15,7 +15,7 @@ var sensors = require('./routes/sensors');
 var app = express();
 
 // view engine setup
-app.engine('html', consolidate.underscore);
+app.engine('html', cons.underscore);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 
@@ -26,6 +26,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'web')));
 
 
 // mapping routes prefixes
