@@ -11,6 +11,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var sensors = require('./routes/sensors');
+var controlledAreas = require('./routes/controlledAreas');
 
 var app = express();
 
@@ -34,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'web')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/sensors', sensors);
+app.use('/controlledAreas', controlledAreas);
 
 // #################################################
 
