@@ -1,1 +1,9 @@
 <script data-main="require.config" src="src/lib/requirejs/require.js"></script>
+
+<script type="text/javascript">
+	require(["src/components/board/Board"], function (Board) {
+		var board = new Board();		
+		board.render();
+		console.log(board.$el);
+	});
+</script>
