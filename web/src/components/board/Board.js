@@ -23,7 +23,7 @@ define(function(require){
 		},
 
 		remove: function(){
-
+			// nothing yet
 		}
 
 	});
