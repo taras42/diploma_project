@@ -36,7 +36,9 @@ define(function(require){
 				model: self.model
 			});
 
-			this.itemsCollection
+			this.itemsCollection.each(function(item){
+				self.listenTo(item, "select, change", _.bind(self.itemEvent, self, item);
+			});
 
 			this.setElement(this.el());
 		},
@@ -51,6 +53,10 @@ define(function(require){
 
 		renderItem: function(){
 
+		},
+
+		itemEvent: function(item){
+			this.trigger('itemEvent', item);
 		},
 
 		render: function(){
