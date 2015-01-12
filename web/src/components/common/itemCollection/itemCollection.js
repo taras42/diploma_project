@@ -30,11 +30,13 @@ define(function(require){
 		},
 
 		initialize: function(){
-			var self = this.model;
+			var self = this;
 
 			this.itemsCollection = Backbone.Collection.extend(this.items, {
 				model: self.model
 			});
+
+			this.itemsCollection
 
 			this.setElement(this.el());
 		},
