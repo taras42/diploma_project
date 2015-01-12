@@ -25,17 +25,15 @@ define(function(require){
 			this.itemTemplate = options.itemTemplate;
 			this.additionalCssClass = options.additionalCssClass || ""
 			this.itemAdditionalCssClass = options.itemAdditionalCssClass || ""
+
+			this.initialize();
 		},
 
 		initialize: function(){
 			var self = this.model;
 
-			this.itemsCollection = Backbone.Collection.extend({
+			this.itemsCollection = Backbone.Collection.extend(this.items, {
 				model: self.model
-			});
-
-			_.each(this.items, function(item){
-				self.itemsCollection.add(item);
 			});
 
 			this.setElement(this.el());
