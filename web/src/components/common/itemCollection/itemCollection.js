@@ -2,10 +2,18 @@ define(function(require){
 
 	var _ = require("underscore"),
 		$ = require('jquery'),
+		itemCollection = require("text!components/common/itemCollection/template/itemCollectionTemplate.htm"),
 		Backbone = require('backbone');
 
 
 	var ItemCollection = Backbone.View.extend({
+
+		el: function(){
+			var self = this;
+			return	_.template(itemTemplate)({
+				additinalCssClass: self.additinalCssClass
+			});
+		},
 
 		constructor: function(options){
 			if(!options || !options.model){
@@ -13,17 +21,44 @@ define(function(require){
 			}
 
 			this.model = options.model;
+			this.items = options.items || {};
 			this.itemTemplate = options.itemTemplate;
 			this.additionalCssClass = options.additionalCssClass || ""
 			this.itemAdditionalCssClass = options.itemAdditionalCssClass || ""
 		},
 
 		initialize: function(){
-			this.items
-		}
+			var self = this.model;
+
+			this.itemsCollection = Backbone.Collection.extend({
+				model: self.model
+			});
+
+			_.each(this.items, function(item){
+				self.itemsCollection.add(item);
+			});
+
+			this.setElement(this.el());
+		},
+
+		addItem: function(){
+
+		},
+
+		removeItem: function(){
+
+		},
+
+		renderItem: function(){
+
+		},
 
 		render: function(){
+			var itemsHtml = itemsCollection.map(function(item){
+				return item.render().$el.html();
+			}).join();
 
+			this.$el.html(itemsHtml);
 		}
 
 	});
