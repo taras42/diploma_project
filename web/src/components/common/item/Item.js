@@ -11,6 +11,7 @@ define(function(require){
 			var self = this;
 			return	_.template(itemTemplate)({
 				additinalCssClass: self.additinalCssClass
+				cid: self.cid
 			});
 		},
 

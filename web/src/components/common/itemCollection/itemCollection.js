@@ -8,6 +8,10 @@ define(function(require){
 
 	var ItemCollection = Backbone.View.extend({
 
+		events: {
+			"click": "select"
+		},
+
 		el: function(){
 			var self = this;
 			return	_.template(itemTemplate)({
@@ -59,8 +63,8 @@ define(function(require){
 
 		},
 
-		itemEvent: function(item){
-			this.trigger('itemEvent', item);
+		itemEvent: function(e){
+			//this.trigger('itemEvent', item);
 		},
 
 		render: function(){
