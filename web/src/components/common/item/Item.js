@@ -16,7 +16,6 @@ define(function(require){
 
 		events: {
 			"click": "select",
-			"change": "change"
 		},
 
 		constructor: function(options){
@@ -41,10 +40,6 @@ define(function(require){
 		},
 
 		select: function(event){
-			this.trigger("select", this, event);
-		},
-
-		change: function(event){
 			this.trigger("select", this, event);
 		}
 		
