@@ -17,11 +17,14 @@ define(function(require){
 
 		initialize: function(){
 			this.sideBar = new BoardSideBar()
+
 			this.setElement(this.el);
+
+			this.render();
 		},
 
 		render: function(){
-			$('body').append(this.el);
+			$('body').append(this.$el.html(this.sideBar.render().$el));
 		},
 
 		remove: function(){

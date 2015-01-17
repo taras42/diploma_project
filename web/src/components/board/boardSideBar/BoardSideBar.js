@@ -22,7 +22,7 @@ define(function(require){
 				itemAdditionalCssClass: "controlledArea",
 				itemTemplate: controlledAreaItemTemplate,
 				model: ControlledAreaModel,
-				items: options.items,
+				items: [{path: "my path", description: "my desc", title: "my title"}],
 			});
 
 			this.addCAButton = new Item({itemTemplate: addCAButtonTemplate});
@@ -34,7 +34,10 @@ define(function(require){
 		},
 
 		render: function(){
+			this.$el.find('.content').html(this.controlledAreasCollection.render().$el);
 			this.$el.find('.footer').html(this.addCAButton.render().$el);
+
+			return this;
 		}
 	});
 

@@ -21,11 +21,7 @@ define(function(require){
 		},
 
 		constructor: function(options){
-			if(!options || !options.model){
-				throw 'Model is required';
-			}
-
-			this.model = options.model;
+			this.model = options.model || Backbone.Model;
 			this.items = options.items || {};
 			this.itemTemplate = options.itemTemplate;
 			this.additionalCssClass = options.additionalCssClass || ""
@@ -86,6 +82,8 @@ define(function(require){
 			}).join();
 
 			this.$el.html(itemsHtml);
+
+			return this;
 		}
 
 	});
