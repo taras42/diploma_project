@@ -9,13 +9,6 @@ define(function(require){
 			description: "",
 			title: "",
 			sensors: []
-		},
-
-		toJSON: function(){
-			var id = this.id,
-				attrs = this.toJSON();
-
-			return _.extend({}, attrs, {id: id});
 		}
 	});
 

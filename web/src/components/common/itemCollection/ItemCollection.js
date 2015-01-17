@@ -10,7 +10,7 @@ define(function(require){
 	var ItemCollection = Backbone.View.extend({
 
 		events: {
-			"click": "select"
+			"click": "itemSelect"
 		},
 
 		el: function(){
@@ -48,8 +48,6 @@ define(function(require){
 				return itemView;
 			});
 
-			this.on("select", self.itemSelect);
-
 			this.setElement(this.el());
 		},
 
@@ -67,7 +65,7 @@ define(function(require){
 
 		itemSelect: function(e){
 			var target = $(e.target);
-			var targetId = target.attr("item-id");
+			var item = target.find("div[item-id]");
 
 
 		},
@@ -77,11 +75,11 @@ define(function(require){
 		},
 
 		render: function(){
-			var itemsHtml = _.map(this.itemsCollection, function(item){
-				return item.render().$el[0].outerHTML;
-			}).join();
+			var self = this;
 
-			this.$el.html(itemsHtml);
+			_.each(this.itemsCollection, function(item){
+				self.$el.append(item.render().$el);
+			});
 
 			return this;
 		}

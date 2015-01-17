@@ -10,7 +10,8 @@ define(function(require){
 		el: function(){
 			var self = this;
 			return	_.template(itemTemplate)({
-				additionalCssClass: self.additionalCssClass
+				additionalCssClass: self.additionalCssClass,
+				model: self.model
 			});
 		},
 
@@ -35,8 +36,15 @@ define(function(require){
 		},
 
 		render: function(){
-			this.$el.html(_.template(this.itemTemplate)({model: this.model.toJSON()}));
+			this.$el.html(_.template(this.itemTemplate)({model: this.modelToJSON()}));
 			return this;
+		},
+
+		modelToJSON: function(){
+			var cid = this.model.cid,
+				attrs = this.model.toJSON();
+
+			return _.extend({}, attrs, {cid: cid});
 		},
 
 		select: function(event){

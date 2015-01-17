@@ -24,7 +24,7 @@ define(function(require){
 		},
 
 		render: function(){
-			$('body').append(this.$el.html(this.sideBar.render().$el));
+			$('body').append(this.$el.append(this.sideBar.render().$el));
 		},
 
 		remove: function(){
