@@ -6,7 +6,6 @@ define(function(require){
 		Item = require("components/common/item/Item"),
 		Backbone = require('backbone');
 
-
 	var ItemCollection = Backbone.View.extend({
 
 		events: {
@@ -65,9 +64,13 @@ define(function(require){
 
 		itemSelect: function(e){
 			var target = $(e.target);
-			var item = target.find("div[item-id]");
+			var itemId = target.parent("div[item-id]").attr("item-id") || target.attr("item-id");
 
+			var itemView = _.find(this.itemsCollection, function(itemView){
+				return itemView.model.cid === itemId;
+			});
 
+			itemView && this.trigger("item:selected", itemView, itemView.model);
 		},
 
 		itemEvent: function(e){
