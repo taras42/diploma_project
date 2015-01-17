@@ -10,8 +10,7 @@ define(function(require){
 		el: function(){
 			var self = this;
 			return	_.template(itemTemplate)({
-				additinalCssClass: self.additinalCssClass
-				cid: self.cid
+				additionalCssClass: self.additionalCssClass
 			});
 		},
 
@@ -25,8 +24,8 @@ define(function(require){
 			}
 
 			this.itemTemplate = options.itemTemplate;
-			this.additinalCssClass = options.additinalCssClass || ""; 
-			this.model = options.model || {};
+			this.additionalCssClass = options.additionalCssClass || ""; 
+			this.model = options.model || new Backbone.Model();
 
 			this.initialize();
 		},
@@ -36,7 +35,7 @@ define(function(require){
 		},
 
 		render: function(){
-			this.$el.html(_.template(this.itemTemplate)(this.model));
+			this.$el.html(_.template(this.itemTemplate)({model: this.model.toJSON()}));
 			return this;
 		},
 
@@ -45,5 +44,7 @@ define(function(require){
 		}
 		
 	});
+
+	return Item;
 
 });

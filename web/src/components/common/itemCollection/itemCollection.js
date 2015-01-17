@@ -2,7 +2,7 @@ define(function(require){
 
 	var _ = require("underscore"),
 		$ = require('jquery'),
-		itemCollection = require("text!components/common/itemCollection/template/itemCollectionTemplate.htm"),
+		itemCollectionTemplate = require("text!components/common/itemCollection/template/itemCollectionTemplate.htm"),
 		Item = require("components/common/item/Item"),
 		Backbone = require('backbone');
 
@@ -15,8 +15,8 @@ define(function(require){
 
 		el: function(){
 			var self = this;
-			return	_.template(itemTemplate)({
-				additinalCssClass: self.additinalCssClass
+			return	_.template(itemCollectionTemplate)({
+				additionalCssClass: self.additionalCssClass
 			});
 		},
 
@@ -27,7 +27,7 @@ define(function(require){
 			this.additionalCssClass = options.additionalCssClass || ""
 			this.itemAdditionalCssClass = options.itemAdditionalCssClass || ""
 
-			this.itemsCollection = new Backbone.Collection();
+			this.itemsCollection = [];
 
 			this.initialize();
 		},
@@ -35,20 +35,20 @@ define(function(require){
 		initialize: function(){
 			var self = this;
 
-			this.itemsCollection.add(_.map(this.items, function(item){
+			this.itemsCollection = _.map(this.items, function(item){
 
 				var model = new self.model(item); 
 
 				var itemView = new Item({
 					model: model,
 					itemTemplate: self.itemTemplate,
-					itemAdditionalCssClass: self.itemAdditionalCssClass		
+					additionalCssClass: self.itemAdditionalCssClass		
 				});
 
 				return itemView;
-			}));
+			});
 
-			this.itemsCollection.on("select", self.itemSelect);
+			this.on("select", self.itemSelect);
 
 			this.setElement(this.el());
 		},
@@ -77,8 +77,8 @@ define(function(require){
 		},
 
 		render: function(){
-			var itemsHtml = itemsCollection.map(function(item){
-				return item.render().$el.html();
+			var itemsHtml = _.map(this.itemsCollection, function(item){
+				return item.render().$el[0].outerHTML;
 			}).join();
 
 			this.$el.html(itemsHtml);
@@ -87,5 +87,7 @@ define(function(require){
 		}
 
 	});
+
+	return ItemCollection;
 
 });

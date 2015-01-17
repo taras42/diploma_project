@@ -18,7 +18,7 @@ define(function(require){
 			this.options = options;
 
 			this.controlledAreasCollection = new ItemCollection({
-				additinalCssClass: "controlledAreas",
+				additionalCssClass: "controlledAreas",
 				itemAdditionalCssClass: "controlledArea",
 				itemTemplate: controlledAreaItemTemplate,
 				model: ControlledAreaModel,
