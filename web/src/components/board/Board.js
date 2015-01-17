@@ -3,6 +3,7 @@ define(function(require){
 	var Backbone = require("backbone"),
 		_ = require("underscore"),
 		$  = require("jquery"),
+		BoardSideBar = require("components/board/boardSideBar/BoardSideBar"),
 		boardTemplate = require('text!components/board/template/boardTemplate.htm');
 
 	
@@ -15,6 +16,7 @@ define(function(require){
 		},
 
 		initialize: function(){
+			this.sideBar = new BoardSideBar()
 			this.setElement(this.el);
 		},
 

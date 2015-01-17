@@ -3,6 +3,7 @@ define(function(require){
 	var _ = require("underscore"),
 		$ = require('jquery'),
 		itemCollection = require("text!components/common/itemCollection/template/itemCollectionTemplate.htm"),
+		Item = require("components/common/item/Item"),
 		Backbone = require('backbone');
 
 
@@ -30,17 +31,26 @@ define(function(require){
 			this.additionalCssClass = options.additionalCssClass || ""
 			this.itemAdditionalCssClass = options.itemAdditionalCssClass || ""
 
+			this.itemsCollection = new Backbone.Collection();
+
 			this.initialize();
 		},
 
 		initialize: function(){
 			var self = this;
 
-			this.itemsCollection = Backbone.Collection.extend(this.items, {
-				model: self.model,
-				itemTemplate: self.itemTemplate,
-				itemAdditionalCssClass: self.itemAdditionalCssClass
-			});
+			this.itemsCollection.add(_.map(this.items, function(item){
+
+				var model = new self.model(item); 
+
+				var itemView = new Item({
+					model: model,
+					itemTemplate: self.itemTemplate,
+					itemAdditionalCssClass: self.itemAdditionalCssClass		
+				});
+
+				return itemView;
+			}));
 
 			this.itemsCollection.on("select", self.itemSelect);
 
@@ -59,7 +69,10 @@ define(function(require){
 
 		},
 
-		itemSelect: function(){
+		itemSelect: function(e){
+			var target = $(e.target);
+			var targetId = target.attr("item-id");
+
 
 		},
 
