@@ -41,7 +41,8 @@ define(function(require){
             
             this.buttons = new ItemCollection({
                 items: options.buttons || defaultButton,
-                itemTemplate: buttonTemplate
+                itemTemplate: buttonTemplate,
+                eventPrefix: "button"
             });
 
             this.additionalClass = options.additionalClass || ""

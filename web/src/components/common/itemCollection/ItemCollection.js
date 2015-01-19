@@ -6,6 +6,11 @@ define(function(require){
 		Item = require("components/common/item/Item"),
 		Backbone = require('backbone');
 
+	var defaults = {
+		eventPrefix: "item",
+		eventSufix: "selected"
+	}
+
 	var ItemCollection = Backbone.View.extend({
 
 		events: {
@@ -22,6 +27,7 @@ define(function(require){
 		constructor: function(options){
 			this.model = options.model || Backbone.Model;
 			this.items = options.items || {};
+			this.eventPrefix = options.eventPrefix || defaults.eventPrefix;
 			this.itemTemplate = options.itemTemplate;
 			this.additionalCssClass = options.additionalCssClass || ""
 			this.itemAdditionalCssClass = options.itemAdditionalCssClass || ""
@@ -51,15 +57,15 @@ define(function(require){
 		},
 
 		addItem: function(){
-
+			// TODO
 		},
 
 		removeItem: function(){
-
+			// TODO		
 		},
 
 		renderItem: function(){
-
+			// TODO
 		},
 
 		itemSelect: function(e){
@@ -70,7 +76,9 @@ define(function(require){
 				return itemView.model.cid === itemId;
 			});
 
-			itemView && this.trigger("item:selected", itemView, itemView.model);
+			var eventSufix = (itemView && itemView.model.get('action')) || defaults.eventSufix;
+
+			itemView && this.trigger(this.eventPrefix + ":" + eventSufix, itemView, itemView.model);
 		},
 
 		itemEvent: function(e){
