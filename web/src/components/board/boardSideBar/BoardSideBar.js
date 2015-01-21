@@ -32,7 +32,7 @@ define(function(require){
 			this.addCAButton = new Item({itemTemplate: addCAButtonTemplate});
 
 			this.addCADialog = new Dialog({
-				buttons: [{title: "Save", action: "save"}],
+				buttons: [{title: "Save", action: "save"}, {title: "Cancel", action: "cancel"}],
 				model: new ControlledAreaModel(),
 				content: addCADialogTemplate 
 			});

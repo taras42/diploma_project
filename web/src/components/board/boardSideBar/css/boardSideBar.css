@@ -1,3 +1,11 @@
-#mainBoard .boardSideBar {
-	width: 400px;
+#mainBoard #boardSideBar {
+	width: 300px;
+	height: 100%;
+	border-right: 1px solid gray;
+}
+
+#mainBoard #boardSideBar .footer{
+	padding: 20px;
+	bottom: 0;
+	position: fixed;
 }

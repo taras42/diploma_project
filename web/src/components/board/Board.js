@@ -6,6 +6,7 @@ define(function(require){
 		BoardSideBar = require("components/board/boardSideBar/BoardSideBar"),
 		boardTemplate = require('text!components/board/template/boardTemplate.htm');
 
+	require("css!components/board/css/board.css");
 	
 	var Board = Backbone.View.extend({
 
