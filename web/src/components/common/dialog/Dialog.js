@@ -46,7 +46,7 @@ define(function(require){
             });
 
             this.additionalClass = options.additionalClass || ""
-            this.contentTemplate = options.contentTemplate;
+            this.content = options.content;
             
             Backbone.View.apply(this, arguments);
         },
@@ -56,7 +56,9 @@ define(function(require){
         },
 
         renderSections: function(){
-            this.$el.find(".content").append(_.template(this.contentTemplate)({model: this.model}));
+            var content = this.content instanceof Backbone.View ? view.render().$el : _.template(this.content)({model: this.model});
+           
+            this.$el.find(".content").append(content);
             this.$el.find(".footer").append(this.buttons.render().$el);
         },
 
