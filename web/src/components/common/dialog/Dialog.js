@@ -27,39 +27,52 @@ define(function(require){
         },
 
 		constructor: function(options) {
+            var self = this;
 
-            if(!options || options.model){
+            if(!options || !options.model){
                 throw 'Model is required';
             }
 
-            if(!options.contentTemplate){
+            if(!options.content){
                 throw 'Content template is required';
             }
 
             this.model = options.model;
             this.title = options.title || "";
+            var eventPrefix = "button";
             
             this.buttons = new ItemCollection({
                 items: options.buttons || defaultButton,
                 itemTemplate: buttonTemplate,
-                eventPrefix: "button"
+                eventPrefix: eventPrefix
             });
 
             this.additionalClass = options.additionalClass || ""
             this.content = options.content;
+
+            _.each(options.buttons, function(buttonObj){
+                self.listenTo(self.buttons, eventPrefix +":"+ buttonObj.action, function(){
+                    self.trigger(eventPrefix +":"+ buttonObj.action, self, self.model);
+                });
+            });
             
             Backbone.View.apply(this, arguments);
         },
 
         initialize: function(){
-            this.renderSections();
+            this.content = this.content instanceof Backbone.View ? view.render().$el : _.template(this.content)({model: this.model});
+            this.$el.find(".content").append(this.content);
+            this.$el.find(".footer").append(this.buttons.render().$el);
         },
 
-        renderSections: function(){
+        setModel: function(model){
+            this.model = model;
+        },
+
+        refresh: function(){
             var content = this.content instanceof Backbone.View ? view.render().$el : _.template(this.content)({model: this.model});
            
-            this.$el.find(".content").append(content);
-            this.$el.find(".footer").append(this.buttons.render().$el);
+            this.$el.find(".content").empty().append(content);
         },
 
         onChange: function(event){

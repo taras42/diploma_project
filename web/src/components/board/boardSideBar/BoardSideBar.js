@@ -5,13 +5,17 @@ define(function(require){
 		$ = require("jquery"),
 		Item = require("components/common/item/Item"),
 		ControlledAreaModel = require("components/board/model/ControlledAreaModel"),
+		Dialog = require("components/common/dialog/Dialog"),
 		ItemCollection = require("components/common/itemCollection/ItemCollection"),
 		boardSideBarTemplate = require("text!components/board/boardSideBar/template/boardSideBarTemplate.htm"),
-		controlledAreaItemTemplate = require("text!components/board/template/controlledAreaItemTemplate.htm"),
-		addCAButtonTemplate = require("text!components/board/boardSideBar/template/addCAButtonTemplate.htm");
+		controlledAreaItemTemplate = require("text!components/board/boardSideBar/template/controlledAreaItemTemplate.htm"),
+		addCAButtonTemplate = require("text!components/board/boardSideBar/template/addCAButtonTemplate.htm"),
+		addCADialogTemplate = require("text!components/board/boardSideBar/template/addCADialogTemplate.htm");
 
+	require('text!components/board/boardSideBar/css/boardSideBar.css');
 
 	var BoardSideBar = Backbone.View.extend({
+
 		el: boardSideBarTemplate,
 
 		constructor: function(options){
@@ -26,11 +30,38 @@ define(function(require){
 			});
 
 			this.addCAButton = new Item({itemTemplate: addCAButtonTemplate});
-			this.initialize();
+
+			this.addCADialog = new Dialog({
+				buttons: [{title: "Save", action: "save"}],
+				model: new ControlledAreaModel(),
+				content: addCADialogTemplate 
+			});
+			
+			Backbone.View.apply(this, arguments);
 		},
 
 		initialize: function(){
-			this.setElement(this.el);
+			this.initEvents();
+		},
+
+		initEvents: function(){
+			this.listenTo(this.addCAButton, "select", this.showAddControlledAreaDialog);
+			this.listenTo(this.addCADialog, "button:save", this.addControlledArea);
+		},
+
+		addControlledArea: function(dialog, model){
+			var collection = this.controlledAreasCollection;
+			var item = collection.addItem(model);
+
+			collection.renderItem(item);
+
+			this.addCADialog.hide();
+			this.addCADialog.setModel(new ControlledAreaModel());
+			this.addCADialog.refresh();
+		},
+
+		showAddControlledAreaDialog: function(){
+			this.addCADialog.render().show();
 		},
 
 		render: function(){

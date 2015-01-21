@@ -56,16 +56,28 @@ define(function(require){
 			this.setElement(this.el());
 		},
 
-		addItem: function(){
-			// TODO
+		addItem: function(model){
+			var self = this;
+
+			var itemView = new Item({
+				model: model,
+				itemTemplate: self.itemTemplate,
+				additionalCssClass: self.itemAdditionalCssClass		
+			});
+
+			this.itemsCollection.push(itemView);
+
+			this.trigger("add:item", this, itemView);
+
+			return itemView;
 		},
 
 		removeItem: function(){
 			// TODO		
 		},
 
-		renderItem: function(){
-			// TODO
+		renderItem: function(itemView){
+			this.$el.append(itemView.render().$el);
 		},
 
 		itemSelect: function(e){
@@ -89,7 +101,7 @@ define(function(require){
 			var self = this;
 
 			_.each(this.itemsCollection, function(item){
-				self.$el.append(item.render().$el);
+				self.renderItem(item);
 			});
 
 			return this;
