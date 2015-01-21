@@ -12,7 +12,7 @@ define(function(require){
 		addCAButtonTemplate = require("text!components/board/boardSideBar/template/addCAButtonTemplate.htm"),
 		addCADialogTemplate = require("text!components/board/boardSideBar/template/addCADialogTemplate.htm");
 
-	require('text!components/board/boardSideBar/css/boardSideBar.css');
+	require('css!components/board/boardSideBar/css/boardSideBar.css');
 
 	var BoardSideBar = Backbone.View.extend({
 
