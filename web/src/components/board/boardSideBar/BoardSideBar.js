@@ -32,9 +32,12 @@ define(function(require){
 			this.addCAButton = new Item({itemTemplate: addCAButtonTemplate});
 
 			this.addCADialog = new Dialog({
-				buttons: [{title: "Save", action: "save"}, {title: "Cancel", action: "cancel"}],
+				buttons: [{title: "Save", action: "save", additionalCssClass: ""}, 
+					{title: "Cancel", action: "cancel", additionalCssClass: ""}],
 				model: new ControlledAreaModel(),
-				content: addCADialogTemplate 
+				content: addCADialogTemplate,
+				title: "Add new controlled area",
+				additionalCssClass: "boardSideBarDialog" 
 			});
 			
 			Backbone.View.apply(this, arguments);
@@ -47,6 +50,7 @@ define(function(require){
 		initEvents: function(){
 			this.listenTo(this.addCAButton, "select", this.showAddControlledAreaDialog);
 			this.listenTo(this.addCADialog, "button:save", this.addControlledArea);
+			this.listenTo(this.addCADialog, "button:cancel", this.hideAddControlledAreaDialog);
 		},
 
 		addControlledArea: function(dialog, model){
@@ -62,6 +66,10 @@ define(function(require){
 
 		showAddControlledAreaDialog: function(){
 			this.addCADialog.render().show();
+		},
+
+		hideAddControlledAreaDialog: function(dialog){
+			dialog.hide();
 		},
 
 		render: function(){

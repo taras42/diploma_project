@@ -21,7 +21,7 @@ define(function(require){
 
         el: function(){
             return _.template(this.template)({
-                additionalClass: this.additionalClass,
+                additionalCssClass: this.additionalCssClass,
                 title: this.title
             });
         },
@@ -47,7 +47,7 @@ define(function(require){
                 eventPrefix: eventPrefix
             });
 
-            this.additionalClass = options.additionalClass || ""
+            this.additionalCssClass = options.additionalCssClass || ""
             this.content = options.content;
 
             _.each(options.buttons, function(buttonObj){
