@@ -1,12 +1,38 @@
 #mainBoard #boardSideBar {
 	width: 300px;
+	background-color: #2E2E30;
 	height: 100%;
-	border-right: 1px solid gray;
+	border-right: 1px solid #2E2E30;
 }
 
 #mainBoard #boardSideBar .footer{
 	height: 50px;
 	width: 300px;
+	text-align: center;
+	border-top: 1px solid #1C1C1C;
 	bottom: 0;
 	position: fixed;
+}
+
+
+#mainBoard #boardSideBar .footer #addControlledArea{
+	margin-top: 12px;
+	position: relative;
+	font-weight: bold;
+	display: block;
+}
+
+#mainBoard #boardSideBar .controlledArea{
+	height: 40px;
+	padding: 10px;
+	font-weight: bold;
+	text-align: center;
+	color: white;
+	background-color: #2E2E30;
+	border-bottom: 1px solid #1C1C1C;
+	border-top: 1px solid #494949;	
+}
+
+#mainBoard #boardSideBar .controlledArea .title{
+	margin-top: 12px;
 }
