@@ -7,5 +7,10 @@
 
 
 .boardSideBarDialog input.control.text{
-	width: 330px;
+	width: 310px;
 }
+
+.boardSideBarDialog span.caption{
+	margin-left: 5px;
+}
+
