@@ -12,24 +12,21 @@ define(function(require){
 
 		el: boardTemplate,
 
-		constructor: function(options){
-			this.initialize();
-		},
-
 		initialize: function(){
-			this.sideBar = new BoardSideBar()
-
-			this.setElement(this.el);
-
+			this.sideBar = new BoardSideBar({
+				parentElement: this.$el
+			});
 			this.render();
 		},
 
 		render: function(){
-			$('body').append(this.$el.append(this.sideBar.render().$el));
+			$('body').append(this.$el);
+			this.sideBar.render().show();
 		},
 
 		remove: function(){
-			// nothing yet
+			this.sideBar.remove();
+			Backbone.View.prototype.remove.apply(this, arguments);
 		}
 
 	});

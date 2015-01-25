@@ -5,6 +5,10 @@
 	border-right: 1px solid #2E2E30;
 }
 
+#mainBoard #boardSideBar .content{
+	overflow: auto;	
+}
+
 #mainBoard #boardSideBar .footer{
 	height: 50px;
 	width: 300px;

@@ -21,6 +21,8 @@ define(function(require){
 		constructor: function(options){
 			this.options = options;
 
+			this.perentElement = options.parentElement ?  $(options.parentElement) : $('body');
+
 			this.controlledAreasCollection = new ItemCollection({
 				additionalCssClass: "controlledAreas",
 				itemAdditionalCssClass: "controlledArea",
@@ -35,11 +37,22 @@ define(function(require){
 		},
 
 		initialize: function(){
+
+			this.content = this.$el.find(".content");
+			this.header = this.$el.find(".header");
+			this.footer = this.$el.find(".footer");
+
 			this.initEvents();
 		},
 
 		initEvents: function(){
+			var self = this;
+
 			this.listenTo(this.addCAButton, "select", this.showAddControlledAreaDialog);
+
+			$(window).on("resize", function(){
+				self.setContentHeight();
+			});
 		},
 
 		addControlledArea: function(dialog, model){
@@ -49,6 +62,14 @@ define(function(require){
 			collection.renderItem(item);
 
 			this.addCADialog.hide().remove();
+		},
+
+		setContentHeight: function(){
+			var bodyHeight = $('body').height();
+
+			this.content.css({
+				"height": (bodyHeight - this.header.height() - this.footer.height()) + "px"
+			});
 		},
 
 		showAddControlledAreaDialog: function(){
@@ -74,10 +95,23 @@ define(function(require){
 		},
 
 		render: function(){
-			this.$el.find('.content').append(this.controlledAreasCollection.render().$el);
-			this.$el.find('.footer').append(this.addCAButton.render().$el);
+			this.content.append(this.controlledAreasCollection.render().$el);
+			this.footer.append(this.addCAButton.render().$el);
+
+			this.perentElement.append(this.$el);
 
 			return this;
+		},
+
+		show: function(){
+			this.setContentHeight();
+			this.$el.show();
+		},
+
+		remove: function(){
+			$(window).off("resize");
+
+			Backbone.View.prototype.remove.apply(this, arguments);
 		}
 	});
 
