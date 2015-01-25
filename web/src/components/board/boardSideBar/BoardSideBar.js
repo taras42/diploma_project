@@ -58,6 +58,7 @@ define(function(require){
 				model: new ControlledAreaModel(),
 				content: addCADialogTemplate,
 				modal: true,
+				parentContainer: "#mainBoard",
 				title: "Add new controlled area",
 				additionalCssClass: "boardSideBarDialog" 
 			});

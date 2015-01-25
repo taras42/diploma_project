@@ -42,6 +42,7 @@ define(function(require){
             this.title = options.title || "";
             var eventPrefix = "button";
             this.modal = !_.isUndefined(options.modal) ? options.modal : false;
+            this.parentContainer = options.parentContainer || 'body'
 
             if(this.modal) {
                 this.dimmer = new Dimmer();
@@ -89,6 +90,18 @@ define(function(require){
             }
         },
 
+        setPosition: function(){
+            var bodyWidth = $('body').width();
+            var bodyHeight = $('body').height();
+            var dialogWidth = this.$el.width();
+            var dialogHeight = this.$el.height();
+
+            this.$el.css({
+                "top": (bodyHeight/2 - dialogHeight/2) + 'px',
+                "left": (bodyWidth/2 - dialogWidth/2) + 'px',
+            });
+        },
+
         refresh: function(){
             var content = this.content instanceof Backbone.View ? view.render().$el : _.template(this.content)({model: this.model});
            
@@ -115,7 +128,8 @@ define(function(require){
 
 		render: function(){
             this.dimmer && this.dimmer.render();
-            $('body').append(this.$el);
+            $(this.parentContainer).append(this.$el);
+            this.setPosition();
             return this;
 		},
 
