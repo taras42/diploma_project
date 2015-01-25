@@ -30,15 +30,6 @@ define(function(require){
 			});
 
 			this.addCAButton = new Item({itemTemplate: addCAButtonTemplate});
-
-			this.addCADialog = new Dialog({
-				buttons: [{title: "Save", action: "save", additionalCssClass: ""}, 
-					{title: "Cancel", action: "cancel", additionalCssClass: ""}],
-				model: new ControlledAreaModel(),
-				content: addCADialogTemplate,
-				title: "Add new controlled area",
-				additionalCssClass: "boardSideBarDialog" 
-			});
 			
 			Backbone.View.apply(this, arguments);
 		},
@@ -49,8 +40,6 @@ define(function(require){
 
 		initEvents: function(){
 			this.listenTo(this.addCAButton, "select", this.showAddControlledAreaDialog);
-			this.listenTo(this.addCADialog, "button:save", this.addControlledArea);
-			this.listenTo(this.addCADialog, "button:cancel", this.hideAddControlledAreaDialog);
 		},
 
 		addControlledArea: function(dialog, model){
@@ -59,17 +48,28 @@ define(function(require){
 
 			collection.renderItem(item);
 
-			this.addCADialog.hide();
-			this.addCADialog.setModel(new ControlledAreaModel());
-			this.addCADialog.refresh();
+			this.addCADialog.hide().remove();
 		},
 
 		showAddControlledAreaDialog: function(){
+			this.addCADialog = new Dialog({
+				buttons: [{title: "Save", action: "save", additionalCssClass: ""}, 
+					{title: "Cancel", action: "cancel", additionalCssClass: ""}],
+				model: new ControlledAreaModel(),
+				content: addCADialogTemplate,
+				modal: true,
+				title: "Add new controlled area",
+				additionalCssClass: "boardSideBarDialog" 
+			});
+
+			this.listenTo(this.addCADialog, "button:save", this.addControlledArea);
+			this.listenTo(this.addCADialog, "button:cancel", this.removeAddControlledAreaDialog);
+
 			this.addCADialog.render().show();
 		},
 
-		hideAddControlledAreaDialog: function(dialog){
-			dialog.hide();
+		removeAddControlledAreaDialog: function(dialog){
+			this.addCADialog.hide().remove();
 		},
 
 		render: function(){
