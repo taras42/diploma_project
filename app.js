@@ -12,6 +12,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var sensors = require('./routes/sensors');
 var controlledAreas = require('./routes/controlledAreas');
+var controlledArea = require('./routes/controlledArea');
 
 var app = express();
 
@@ -36,6 +37,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/sensors', sensors);
 app.use('/controlledAreas', controlledAreas);
+app.use('/controlledArea', controlledArea);
 
 // #################################################
 

@@ -9,7 +9,8 @@ define(function(require){
 			description: "",
 			title: "",
 			sensors: []
-		}
+		},
+		url: "/controlledArea"
 	});
 
 	return ControlledAreaModel;

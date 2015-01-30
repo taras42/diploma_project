@@ -56,12 +56,16 @@ define(function(require){
 		},
 
 		addControlledArea: function(dialog, model){
+			var self = this;
+
 			var collection = this.controlledAreasCollection;
 			var item = collection.addItem(model);
 
 			collection.renderItem(item);
-
-			this.addCADialog.hide().remove();
+			
+			model.save().then(function(){
+				self.addCADialog.hide().remove();	
+			});
 		},
 
 		setContentHeight: function(){
