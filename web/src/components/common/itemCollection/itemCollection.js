@@ -32,7 +32,7 @@ define(function(require){
 			this.additionalCssClass = options.additionalCssClass || ""
 			this.itemAdditionalCssClass = options.itemAdditionalCssClass || ""
 
-			this.itemsCollection = [];
+			this.itemsCollectionView = [];
 
 			this.initialize();
 		},
@@ -40,7 +40,7 @@ define(function(require){
 		initialize: function(){
 			var self = this;
 
-			this.itemsCollection = _.map(this.items, function(item){
+			this.itemsCollectionView = _.map(this.items, function(item){
 
 				var model = new self.model(item); 
 
@@ -65,7 +65,7 @@ define(function(require){
 				additionalCssClass: self.itemAdditionalCssClass		
 			});
 
-			this.itemsCollection.push(itemView);
+			this.itemsCollectionView.push(itemView);
 
 			this.trigger("add:item", this, itemView);
 
@@ -84,7 +84,7 @@ define(function(require){
 			var target = $(e.target);
 			var itemId = target.parent("div[item-id]").attr("item-id") || target.attr("item-id");
 
-			var itemView = _.find(this.itemsCollection, function(itemView){
+			var itemView = _.find(this.itemsCollectionView, function(itemView){
 				return itemView.model.cid === itemId;
 			});
 
@@ -100,7 +100,7 @@ define(function(require){
 		render: function(){
 			var self = this;
 
-			_.each(this.itemsCollection, function(item){
+			_.each(this.itemsCollectionView, function(item){
 				self.renderItem(item);
 			});
 

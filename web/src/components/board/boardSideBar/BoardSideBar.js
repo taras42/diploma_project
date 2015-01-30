@@ -5,6 +5,7 @@ define(function(require){
 		$ = require("jquery"),
 		Item = require("components/common/item/Item"),
 		ControlledAreaModel = require("components/board/model/ControlledAreaModel"),
+		ControlledAreasCollection = require("components/board/collection/ControlledAreasCollection"),
 		Dialog = require("components/common/dialog/Dialog"),
 		ItemCollection = require("components/common/itemCollection/ItemCollection"),
 		boardSideBarTemplate = require("text!components/board/boardSideBar/template/boardSideBarTemplate.htm"),
@@ -23,15 +24,15 @@ define(function(require){
 
 			this.perentElement = options.parentElement ?  $(options.parentElement) : $('body');
 
-			this.controlledAreasCollection = new ItemCollection({
-				additionalCssClass: "controlledAreas",
-				itemAdditionalCssClass: "controlledArea",
-				itemTemplate: controlledAreaItemTemplate,
-				model: ControlledAreaModel,
-				items: [{path: "my path", description: "my desc", title: "my title", id: 1}],
-			});
-
 			this.addCAButton = new Item({itemTemplate: addCAButtonTemplate});
+
+			this.controlledAreasViewCollection = new ItemCollection({
+					additionalCssClass: "controlledAreas",
+					itemAdditionalCssClass: "controlledArea",
+					itemTemplate: controlledAreaItemTemplate,
+					model: ControlledAreaModel,
+					items: [],
+			});
 			
 			Backbone.View.apply(this, arguments);
 		},
@@ -43,6 +44,8 @@ define(function(require){
 			this.footer = this.$el.find(".footer");
 
 			this.initEvents();
+
+			this.initControlledAreasCollection();
 		},
 
 		initEvents: function(){
@@ -55,14 +58,28 @@ define(function(require){
 			});
 		},
 
+		initControlledAreasCollection: function(){
+			var self = this;
+
+			this.controlledAreasCollection = new ControlledAreasCollection([]);
+
+			this.controlledAreasCollection.fetch().then(function(collection, response){
+				_.each(self.controlledAreasCollection.models, function(model){
+					var item = self.controlledAreasViewCollection.addItem(model);
+					self.controlledAreasViewCollection.renderItem(item);
+				});
+			});
+		},
+
 		addControlledArea: function(dialog, model){
 			var self = this;
 
-			var collection = this.controlledAreasCollection;
-			var item = collection.addItem(model);
+			this.controlledAreasCollection.add(model);
 
-			collection.renderItem(item);
-			
+			var item = this.controlledAreasViewCollection.addItem(model);
+
+			this.controlledAreasViewCollection.renderItem(item);
+
 			model.save().then(function(){
 				self.addCADialog.hide().remove();	
 			});
@@ -99,7 +116,7 @@ define(function(require){
 		},
 
 		render: function(){
-			this.content.append(this.controlledAreasCollection.render().$el);
+			this.content.append(this.controlledAreasViewCollection.render().$el);
 			this.footer.append(this.addCAButton.render().$el);
 
 			this.perentElement.append(this.$el);
