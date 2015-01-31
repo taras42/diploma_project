@@ -94,7 +94,7 @@ define(function(require){
 
 		showAddControlledAreaDialog: function(){
 			this.addCADialog = new Dialog({
-				buttons: [{title: "Save", action: "save", additionalCssClass: ""}, 
+				buttons: [{title: "Add", action: "add", additionalCssClass: ""}, 
 					{title: "Cancel", action: "cancel", additionalCssClass: ""}],
 				model: new ControlledAreaModel(),
 				content: addCADialogTemplate,
@@ -104,7 +104,7 @@ define(function(require){
 				additionalCssClass: "boardSideBarDialog" 
 			});
 
-			this.listenTo(this.addCADialog, "button:save", this.addControlledArea);
+			this.listenTo(this.addCADialog, "button:add", this.addControlledArea);
 			this.listenTo(this.addCADialog, "button:cancel", this.removeAddControlledAreaDialog);
 
 			this.addCADialog.render().show();

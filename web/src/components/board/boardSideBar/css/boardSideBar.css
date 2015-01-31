@@ -27,16 +27,28 @@
 }
 
 #mainBoard #boardSideBar .controlledArea{
-	height: 40px;
-	padding: 10px;
+	height: 60px;
 	font-weight: bold;
 	text-align: center;
+	cursor: pointer;
 	color: white;
 	background-color: #2E2E30;
 	border-bottom: 1px solid #1C1C1C;
 	border-top: 1px solid #494949;	
 }
 
+#mainBoard #boardSideBar .controlledArea:hover{
+	background-color: #2B463D;
+}
+
 #mainBoard #boardSideBar .controlledArea .title{
-	margin-top: 12px;
+	margin-top: 22px;
+	margin-right: 10px;
+}
+
+#mainBoard #boardSideBar .controlledArea .decorationBar{
+	width: 10px;
+	position: relative;
+	float: left;
+	height: 100%;
 }
