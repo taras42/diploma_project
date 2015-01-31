@@ -80,9 +80,8 @@ define(function(require){
 
 			this.controlledAreasViewCollection.renderItem(item);
 
-			model.save().then(function(){
-				self.addCADialog.hide().remove();	
-			});
+			model.save();
+			self.addCADialog.hide().remove();	
 		},
 
 		setContentHeight: function(){

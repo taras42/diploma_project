@@ -1,3 +1,5 @@
 node_modules/
 web/src/lib/
 *.log
+bin/www
+config/config.json
