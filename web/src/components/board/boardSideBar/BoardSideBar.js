@@ -52,6 +52,8 @@ define(function(require){
 			var self = this;
 
 			this.listenTo(this.addCAButton, "select", this.showAddControlledAreaDialog);
+			this.listenTo(this.controlledAreasViewCollection, "item:mouseenter item:mouseleave", this.toggleControlledAreaStyle);
+			this.listenTo(this.controlledAreasViewCollection, "item:selected", this.selectControlledArea);
 
 			$(window).on("resize", function(){
 				self.setContentHeight();
@@ -82,6 +84,18 @@ define(function(require){
 
 			model.save();
 			self.addCADialog.hide().remove();	
+		},
+
+		selectControlledArea: function(itemView, itemModel){
+			this.selectedControlledArea && this.selectedControlledArea.$el.removeClass("selected");
+
+			this.selectedControlledArea  = itemView;
+
+			this.selectedControlledArea.$el.addClass("selected");
+		},
+
+		toggleControlledAreaStyle: function(itemView, itemModel){
+			itemView.$el.toggleClass("hovered");
 		},
 
 		setContentHeight: function(){

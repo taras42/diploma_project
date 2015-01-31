@@ -37,7 +37,8 @@
 	border-top: 1px solid #494949;	
 }
 
-#mainBoard #boardSideBar .controlledArea:hover{
+#mainBoard #boardSideBar .controlledArea.hovered,
+#mainBoard #boardSideBar .controlledArea.selected{
 	background-color: #2B463D;
 }
 
@@ -51,4 +52,14 @@
 	position: relative;
 	float: left;
 	height: 100%;
+}
+
+#mainBoard #boardSideBar .controlledArea.hovered .decorationBar,
+#mainBoard #boardSideBar .controlledArea.selected .decorationBar{
+	background-color: #1DA96F;
+}
+
+#mainBoard #boardSideBar .controlledArea.selected .decorationBar,
+#mainBoard #boardSideBar .controlledArea.selected{
+	box-shadow: inset 4px 1px 8px 0px black;	
 }

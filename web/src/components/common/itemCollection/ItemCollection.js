@@ -8,16 +8,16 @@ define(function(require){
 
 	var defaults = {
 		eventPrefix: "item",
-		eventSufix: "selected"
+		eventSufix: "selected",
+		clickEvent: "click",
 	};
 
 	var ItemCollection = Backbone.View.extend({
 
 		events: {
-			"click .item": "_onItemSelect",
+			"click .item": "_onItemEvent",
 			"mouseenter .item": "_onItemEvent",
-			"mouseleave .item": "_onItemEvent",
-			"keydown .item": "_onItemEvent",
+			"mouseleave .item": "_onItemEvent"
 		},
 
 		el: function(){
@@ -83,22 +83,14 @@ define(function(require){
 			this.$el.append(itemView.render().$el);
 		},
 
-		_onItemSelect: function(e){
-			var itemId = this._getItemId(e);
-
-			var itemView = this._getItemByCID(itemId);
-
-			var eventSufix = (itemView && itemView.model.get('action')) || defaults.eventSufix;
-
-			itemView && this.trigger(this.eventPrefix + ":" + eventSufix, itemView, itemView.model);
-		},
-
 		_onItemEvent: function(e){
 			var itemId = this._getItemId(e);
 
 			var itemView = this._getItemByCID(itemId);
 
-			itemView && this.trigger(this.eventPrefix + ":" + e.type, itemView, itemView.model);
+			var eventSufix = e.type === defaults.clickEvent ? ((itemView && itemView.model.get('action')) || defaults.eventSufix): e.type;
+
+			itemView && this.trigger(this.eventPrefix + ":" + eventSufix, itemView, itemView.model);
 		},
 
 		_getItemByCID: function(cid){
