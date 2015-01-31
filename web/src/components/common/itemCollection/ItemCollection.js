@@ -14,7 +14,10 @@ define(function(require){
 	var ItemCollection = Backbone.View.extend({
 
 		events: {
-			"click": "itemSelect"
+			"click .item": "_onItemSelect",
+			"mouseenter .item": "_onItemEvent",
+			"mouseleave .item": "_onItemEvent",
+			"keydown .item": "_onItemEvent",
 		},
 
 		el: function(){
@@ -80,21 +83,35 @@ define(function(require){
 			this.$el.append(itemView.render().$el);
 		},
 
-		itemSelect: function(e){
-			var target = $(e.target);
-			var itemId = target.parent("div[item-id]").attr("item-id") || target.attr("item-id");
+		_onItemSelect: function(e){
+			var itemId = this._getItemId(e);
 
-			var itemView = _.find(this.itemsCollectionView, function(itemView){
-				return itemView.model.cid === itemId;
-			});
+			var itemView = this._getItemByCID(itemId);
 
 			var eventSufix = (itemView && itemView.model.get('action')) || defaults.eventSufix;
 
 			itemView && this.trigger(this.eventPrefix + ":" + eventSufix, itemView, itemView.model);
 		},
 
-		itemEvent: function(e){
-			//this.trigger('itemEvent', item);
+		_onItemEvent: function(e){
+			var itemId = this._getItemId(e);
+
+			var itemView = this._getItemByCID(itemId);
+
+			itemView && this.trigger(this.eventPrefix + ":" + e.type, itemView, itemView.model);
+		},
+
+		_getItemByCID: function(cid){
+			return _.find(this.itemsCollectionView, function(itemView){
+				return itemView.model.cid === cid;
+			});
+		},
+
+		_getItemId: function(e){
+			var target = $(e.target);
+			var itemId = target.parent("div[item-id]").attr("item-id") || target.attr("item-id");
+
+			return itemId;
 		},
 
 		render: function(){

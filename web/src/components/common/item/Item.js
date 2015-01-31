@@ -17,6 +17,8 @@ define(function(require){
 
 		events: {
 			"click": "select",
+			"mouseenter": "_onMouseEnter",
+			"mouseleave": "_onMouseLeave",
 		},
 
 		constructor: function(options){
@@ -49,8 +51,16 @@ define(function(require){
 
 		select: function(event){
 			this.trigger("select", this, event);
-		}
+		},
+
+		_onMouseEnter: function(){
+			this.trigger("mouseenter", this, event);
+		},
 		
+		_onMouseLeave: function(){
+			this.trigger("mouseleave", this, event);
+		}
+
 	});
 
 	return Item;
