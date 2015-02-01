@@ -2,7 +2,8 @@
 	width: 300px;
 	background-color: #2E2E30;
 	height: 100%;
-	border-right: 1px solid #2E2E30;
+	float: left;
+	border-right: 1px solid #1C1C1C;
 }
 
 #mainBoard #boardSideBar .content{

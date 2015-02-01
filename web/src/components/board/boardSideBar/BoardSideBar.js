@@ -92,6 +92,8 @@ define(function(require){
 			this.selectedControlledArea  = itemView;
 
 			this.selectedControlledArea.$el.addClass("selected");
+
+			this.trigger("item:select", this, itemView);
 		},
 
 		toggleControlledAreaStyle: function(itemView, itemModel){
