@@ -6,6 +6,11 @@ define(function (require) {
 		boardCanvasUploadTemplate = require("text!components/board/boardCanvas/template/boardCanvasUploadTemplate.htm");
 
 	var BoardCanvasUploadView = Backbone.View.extend({
+		
+		events: {
+			"change input.upload": "_onUploadInputChange"
+		},
+
 		el: function(){
 			return _.template(boardCanvasUploadTemplate)({
 				title: this.title
@@ -43,6 +48,10 @@ define(function (require) {
 				'top': (parentElementHeight/2 - this.$el.outerHeight()/2) + 'px',
 				'left': (parentElementWidth/2 - this.$el.outerWidth()/2) + 'px'
 			});
+		},
+
+		_onUploadInputChange: function(){
+			this.trigger("upload:change", this);
 		},
 
 		show: function(){

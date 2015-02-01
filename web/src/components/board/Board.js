@@ -45,7 +45,7 @@ define(function(require){
 
 		setCanvasWidth: function(){
 			var canvasLeftBorderWidth = parseInt(this.boardCanvas.$el.css("borderLeftWidth"));
-			this.boardCanvas.$el.css("width", $('body').width() - this.sideBar.$el.outerWidth() - canvasLeftBorderWidth);
+			this.boardCanvas.$el.css("width", this.$el.width() - this.sideBar.$el.outerWidth() - canvasLeftBorderWidth);
 		},
 
 		renderCanvas: function(){
