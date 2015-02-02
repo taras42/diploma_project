@@ -4,6 +4,7 @@ define(function (require) {
 		_ = require("underscore"),
 		$ = require("jquery"),
 		BoardCanvasUploadView = require("components/board/boardCanvas/view/BoardCanvasUploadView"),
+		BoardCanvasCAView = require("components/board/boardCanvas/view/BoardCanvasCAView"),
 		boardCanvasTemplate = require("text!components/board/boardCanvas/template/boardCanvasTemplate.htm");
 
 	require("css!components/board/boardCanvas/css/boardCanvasCss.css");
@@ -14,7 +15,7 @@ define(function (require) {
 
 		constructor: function(options){
 
-			this.perentElement = options.parentElement ?  $(options.parentElement) : $('body');
+			this.parentElement = options.parentElement ?  $(options.parentElement) : $('body');
 
 			Backbone.View.apply(this, arguments);
 		},
@@ -23,6 +24,10 @@ define(function (require) {
 			this.uploadView = new BoardCanvasUploadView({
 				parentElement: this.$el,
 				title: "Add CA Plan"
+			});
+
+			this.CAView = new BoardCanvasCAView({
+				parentElement: this.$el,
 			});
 
 			this.initEvents();
@@ -38,8 +43,8 @@ define(function (require) {
 		},
 
 		previewControlledArea: function(uploadView){
-			
 			this.uploadView.hide();
+			this.CAView.render().showImageResource(uploadView.uploadInput[0].files[0]);
 		},
 
 		show: function(){
@@ -48,7 +53,7 @@ define(function (require) {
 		},
 
 		render: function(){
-			this.perentElement.append(this.$el);
+			this.parentElement.append(this.$el);
 
 			return this;
 		}
