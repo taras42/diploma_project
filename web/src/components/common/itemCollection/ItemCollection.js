@@ -9,7 +9,7 @@ define(function(require){
 	var defaults = {
 		eventPrefix: "item",
 		eventSufix: "selected",
-		clickEvent: "click",
+		clickEvent: "click"
 	};
 
 	var ItemCollection = Backbone.View.extend({

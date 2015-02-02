@@ -18,7 +18,7 @@ define(function(require){
 		events: {
 			"click": "select",
 			"mouseenter": "_onMouseEnter",
-			"mouseleave": "_onMouseLeave",
+			"mouseleave": "_onMouseLeave"
 		},
 
 		constructor: function(options){
