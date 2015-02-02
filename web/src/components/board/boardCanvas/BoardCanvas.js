@@ -24,6 +24,12 @@ define(function (require) {
 				parentElement: this.$el,
 				title: "Add CA Plan"
 			});
+
+			this.initEvents();
+		},
+
+		initEvents: function(){
+			this.listenTo(this.uploadView, "upload:change", this.previewControlledArea);
 		},
 
 		showControlledArea: function(model){
@@ -31,9 +37,10 @@ define(function (require) {
 			model.get("image") ? true : this.uploadView.show();
 		},
 
-		// previewControlledArea: function(){
-			// TODO
-		// },
+		previewControlledArea: function(uploadView){
+			
+			this.uploadView.hide();
+		},
 
 		show: function(){
 			this.uploadView.render();
