@@ -10,20 +10,23 @@ define(function (require) {
 		initialize: function(options){
 			this.parentElement = options.parentElement ?  $(options.parentElement) : $('body');
 			this.fileReader = new FileReader();
+			this.imageBase64 = "";
 			this.initEvents();
 		},
 
 		initEvents: function(){
 			var self = this;
-			this.fileReader.addEventListener("load", _.bind(self.setImageResourceSrc, self)); 
+			this.fileReader.addEventListener("load", _.bind(self.saveImageBase64, self)); 
 		},
 
 		showImageResource: function(resource){
 			this.fileReader.readAsDataURL(resource);
+			var src = this.createObjectURL(resource);
+			this.$el.find('.imageResource').attr("src", src);
 		},
 
-		setImageResourceSrc: function(FREvent){
-			this.$el.find('.imageResource').attr("src", FREvent.target.result);
+		saveImageBase64: function(FREvent){
+			this.imageBase64 = FREvent.target.result;
 		},
 
 		show: function(){
@@ -37,6 +40,14 @@ define(function (require) {
 		render: function(){
 			this.parentElement.append(this.$el);
 			return this;
+		},
+
+		createObjectURL: function(object) {
+    		return (window.URL) ? window.URL.createObjectURL(object) : window.webkitURL.createObjectURL(object);
+		},
+
+		revokeObjectURL: function(url) {
+		    return (window.URL) ? window.URL.revokeObjectURL(url) : window.webkitURL.revokeObjectURL(url);
 		},
 
 		remove: function(){
