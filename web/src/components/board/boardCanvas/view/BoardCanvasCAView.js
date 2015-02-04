@@ -20,7 +20,7 @@ define(function (require) {
 			this.fileReader.addEventListener("load", _.bind(self.saveImageBase64, self)); 
 		},
 
-		showImageResource: function(resource){
+		setImageResource: function(resource){
 			var src;
 
 			if(_.isString(resource)){
@@ -31,6 +31,8 @@ define(function (require) {
 			}
 			
 			this.$imageResource.attr("src", src);
+
+			return this;
 		},
 
 		saveImageBase64: function(FREvent){
@@ -39,12 +41,10 @@ define(function (require) {
 
 		show: function(){
 			this.$el.show();
-			return this;
 		},
 
 		hide: function(){
 			this.$el.hide();
-			return this;
 		},
 
 		render: function(){

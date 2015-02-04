@@ -43,12 +43,12 @@ define(function (require) {
 			this.uploadView.hide();
 			this.CAView.hide();
 
-			imageURL ? this.CAView.show().showImageResource(imageURL) : this.uploadView.show();
+			imageURL ? this.CAView.setImageResource(imageURL).show() : this.uploadView.show();
 		},
 
 		previewControlledArea: function(uploadView){
 			this.uploadView.hide();
-			this.CAView.render().showImageResource(uploadView.uploadInput[0].files[0]);
+			this.CAView.setImageResource(uploadView.uploadInput[0].files[0]).show();
 		},
 
 		show: function(){
