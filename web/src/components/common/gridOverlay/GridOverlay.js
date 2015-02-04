@@ -45,8 +45,16 @@ define(function(require){
             });
         },
 
+        show: function(){
+            this.$el.show();
+        },
+
+        hide: function(){
+            this.$el.hide();
+        },
+
         render: function(){
-            this.$el.append(this.cellsCollection.render().$el);
+            this.parentElement.append(this.$el.append(this.cellsCollection.render().$el));
             return this;
         }
 
