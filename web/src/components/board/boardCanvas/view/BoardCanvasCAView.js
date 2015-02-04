@@ -11,6 +11,7 @@ define(function (require) {
 			this.parentElement = options.parentElement ?  $(options.parentElement) : $('body');
 			this.fileReader = new FileReader();
 			this.imageBase64 = "";
+			this.$imageResource = this.$el.find('.imageResource');
 			this.initEvents();
 		},
 
@@ -20,9 +21,16 @@ define(function (require) {
 		},
 
 		showImageResource: function(resource){
-			this.fileReader.readAsDataURL(resource);
-			var src = this.createObjectURL(resource);
-			this.$el.find('.imageResource').attr("src", src);
+			var src;
+
+			if(_.isString(resource)){
+				src = resource;
+			}else{
+				this.fileReader.readAsDataURL(resource);
+				src = this.createObjectURL(resource);
+			}
+			
+			this.$imageResource.attr("src", src);
 		},
 
 		saveImageBase64: function(FREvent){
@@ -31,10 +39,12 @@ define(function (require) {
 
 		show: function(){
 			this.$el.show();
+			return this;
 		},
 
 		hide: function(){
 			this.$el.hide();
+			return this;
 		},
 
 		render: function(){

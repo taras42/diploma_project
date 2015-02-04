@@ -38,8 +38,12 @@ define(function (require) {
 		},
 
 		showControlledArea: function(model){
+			var imageURL = model.get("image");
+
 			this.uploadView.hide();
-			model.get("image") ? true : this.uploadView.show();
+			this.CAView.hide();
+
+			imageURL ? this.CAView.show().showImageResource(imageURL) : this.uploadView.show();
 		},
 
 		previewControlledArea: function(uploadView){
@@ -49,6 +53,7 @@ define(function (require) {
 
 		show: function(){
 			this.uploadView.render();
+			this.CAView.render();
 			this.$el.show();
 		},
 
