@@ -61,6 +61,13 @@ define(function (require) {
 			this.parentElement.append(this.$el);
 
 			return this;
+		},
+
+		remove: function(){
+			this.uploadView.remove();
+			this.CAView.remove();
+
+			Backbone.View.prototype.remove.apply(this, arguments);
 		}
 
 	});
