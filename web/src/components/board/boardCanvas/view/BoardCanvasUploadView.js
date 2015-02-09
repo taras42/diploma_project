@@ -27,7 +27,7 @@ define(function (require) {
 
 			this.parentElement = options.parentElement ?  $(options.parentElement) : $('body');
 
-			this.uploadInput = this.$el.find("input.upload");
+			this.$uploadInput = this.$el.find("input.upload");
 
 			this.initEvents();
 		},
@@ -48,6 +48,10 @@ define(function (require) {
 				'top': (parentElementHeight/2 - this.$el.outerHeight()/2) + 'px',
 				'left': (parentElementWidth/2 - this.$el.outerWidth()/2) + 'px'
 			});
+		},
+
+		resetUploadInput: function(){
+			this.$uploadInput.val("");
 		},
 
 		_onUploadInputChange: function(){

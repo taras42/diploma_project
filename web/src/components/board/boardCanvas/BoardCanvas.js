@@ -48,7 +48,8 @@ define(function (require) {
 
 		previewControlledArea: function(uploadView){
 			this.uploadView.hide();
-			this.CAView.setImageResource(uploadView.uploadInput[0].files[0]).show();
+			this.CAView.setImageResource(uploadView.$uploadInput[0].files[0]).show();
+			uploadView.resetUploadInput();
 		},
 
 		show: function(){
