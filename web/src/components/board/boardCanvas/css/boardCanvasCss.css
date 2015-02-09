@@ -27,9 +27,18 @@
 
 #mainBoard #boardCanvas .canvasCA {
 	display: block;
-	width: 1280px;
-	height: 720px;
 	overflow: auto;
-	margin-left: auto;
-	margin-right: auto;
+	position: relative;
+	text-align: center;
+	white-space: nowrap;
+}
+
+#mainBoard #boardCanvas .canvasCA .imageResource{
+	vertical-align: middle;	
+}
+
+#mainBoard #boardCanvas .canvasCA .imageHelper{
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
 }

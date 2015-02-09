@@ -4,6 +4,13 @@ define(function (require) {
 		_ = require("underscore"),
 		boardCanvasCAViewTemplate = require("text!components/board/boardCanvas/template/boardCanvasCATemplate.htm");
 
+	var defautls = {
+		OFFSET_TOP: 50,
+		OFFSET_LEFT: 50,
+		IMAGE_MAX_WIDTH_TOLERANCE: 10,
+		IMAGE_MAX_HEIGHT_TOLERANCE: 10
+	};
+
 	var BoardCanvasCAView = Backbone.View.extend({
 		el: boardCanvasCAViewTemplate,
 
@@ -49,7 +56,25 @@ define(function (require) {
 
 		render: function(){
 			this.parentElement.append(this.$el);
+			this.setPosition();
 			return this;
+		},
+
+		setPosition: function(){
+			var height = this.parentElement.height() - defautls.OFFSET_TOP*2;
+			var width = this.parentElement.width() - defautls.OFFSET_LEFT*2;
+
+			this.$el.css({
+				height: height,
+				width: width,
+				top: defautls.OFFSET_TOP,
+				left: defautls.OFFSET_LEFT
+			});
+
+			this.$imageResource.css({
+				"maxWidth": width - defautls.IMAGE_MAX_WIDTH_TOLERANCE,
+				"maxHeight": height - defautls.IMAGE_MAX_HEIGHT_TOLERANCE			
+			});
 		},
 
 		createObjectURL: function(object) {

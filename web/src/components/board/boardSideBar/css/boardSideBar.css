@@ -7,7 +7,8 @@
 }
 
 #mainBoard #boardSideBar .content{
-	overflow: auto;	
+	overflow: auto;
+	border-bottom: 1px solid #494949;	
 }
 
 #mainBoard #boardSideBar .footer{
