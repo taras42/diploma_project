@@ -4,6 +4,8 @@ define(function(require){
         _ = require('underscore'),
         $ = require('jquery'),
         gridTemplate = require("text!./template/gridTemplate.htm"),
+        cellTemplate = require("text!./template/cellTemplate.htm"),
+        CellModel = require("./model/CellModel");
         ItemCollection = require("components/common/itemCollection/ItemCollection");
 
 
@@ -12,14 +14,18 @@ define(function(require){
 
         constructor: function(options){
 
-            this.parentElement = options.parentElement ?  $(options.parentElement) : $('body');
+            var body = $('body');
+
+            this.$parentElement = options.parentElement ?  $(options.parentElement) : body;
+            this.$targetElement = options.targetElement ? $(options.targetElement) : body;
+            this.resolution = options.resolution ? options.resolution : 50;
 
             this.cellsCollection = new ItemCollection({
                 additionalCssClass: options.gridAdditionCssClass || "",
                 itemAdditionalCssClass: options.cellAdditionCssClass || "",
-                itemTemplate: options.cellTemplate,
-                model: options.model,
-                items: options.data || []
+                itemTemplate: cellTemplate,
+                model: CellModel,
+                items: []
             });
 
             Backbone.View.apply(this, arguments);
@@ -33,11 +39,22 @@ define(function(require){
             this.listenTo(this.cellsCollection, "item:selected", this.onCellClick);
         },
 
+        calculateGridSize: function(){
+            var targetElementWidth = this.$targetElement.width();
+            var targetElementHeight = this.$targetElement.height();
+
+            // TODO
+        },
+
+        custructGrid: function(){
+
+        },
+
         onCellClick:function(cellView, model) {
             this.trigger("cell:selected", cellView, model);
         },
 
-        renderData: function(data) {
+        renderCells: function(data) {
             var self = this;
             _.each(this.cellCollection.models, function(model){
                 var item = self.cellsCollection.addItem(model);
@@ -54,7 +71,7 @@ define(function(require){
         },
 
         render: function(){
-            this.parentElement.append(this.$el.append(this.cellsCollection.render().$el));
+            this.$parentElement.append(this.$el.append(this.cellsCollection.render().$el));
             return this;
         }
 
