@@ -28,11 +28,16 @@ define(function(require){
                 items: []
             });
 
+            this.cellsXCount = 0;
+            this.cellsYCount = 0;
+
             Backbone.View.apply(this, arguments);
         },
 
         initialize: function() {
             this.initEvents();
+            this.calculateGridSize();
+            this.custructGrid();
         },
 
         initEvents: function() {
@@ -40,26 +45,44 @@ define(function(require){
         },
 
         calculateGridSize: function(){
-            var targetElementWidth = this.$targetElement.width();
-            var targetElementHeight = this.$targetElement.height();
+            var targetElementWidth  = this.cellsXCount = this.$targetElement.width();
+            var targetElementHeight = this.cellsYCount = this.$targetElement.height();
 
-            // TODO
+            var xDiff = targetElementWidth % this.resolution;
+            var yDiff = targetElementHeight % this.resolution;
+
+            xDiff && (this.cellsXCount = targetElementWidth - xDiff + this.resolution);
+
+            yDiff && (this.cellsYCount = targetElementHeight - yDiff + this.resolution);
         },
 
         custructGrid: function(){
+            var xCoordinate = 0;
+            var yCoordinate = 0;
 
+            for(var i = 0; i < this.cellsYCount; i += this.resolution){
+                for(var j = 0; j < this.cellsYCount; j += this.resolution){
+
+                    var item = this.cellsCollection.thisItem(new CellModel({
+                        x: xCoordinate,
+                        y: yCoordinate,
+                        resolution: this.resolution  
+                    }));
+
+                    item.css({
+                        width: this.resolution,
+                        height: this.resolution
+                    });
+
+                    xCoordinate++;
+                }
+                
+                yCoordinate++;   
+            }
         },
 
         onCellClick:function(cellView, model) {
             this.trigger("cell:selected", cellView, model);
-        },
-
-        renderCells: function(data) {
-            var self = this;
-            _.each(this.cellCollection.models, function(model){
-                var item = self.cellsCollection.addItem(model);
-                self.cellsCollection.renderItem(item);
-            });
         },
 
         show: function(){
