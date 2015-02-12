@@ -4,6 +4,7 @@ define(function (require) {
 		_ = require("underscore"),
 		$ = require("jquery"),
 		BoardCanvasUploadView = require("components/board/boardCanvas/view/BoardCanvasUploadView"),
+		GridOverlay = require("components/common/gridOverlay/GridOverlay"),
 		BoardCanvasCAView = require("components/board/boardCanvas/view/BoardCanvasCAView"),
 		boardCanvasTemplate = require("text!components/board/boardCanvas/template/boardCanvasTemplate.htm");
 
@@ -29,6 +30,10 @@ define(function (require) {
 			this.CAView = new BoardCanvasCAView({
 				parentElement: this.$el,
 			});
+
+			// this.gridOverlay = new GridOverlay({
+
+			// });
 
 			this.initEvents();
 		},

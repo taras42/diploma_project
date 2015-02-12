@@ -38,6 +38,7 @@ define(function(require){
             this.initEvents();
             this.calculateGridSize();
             this.custructGrid();
+            this.setGridSize();
         },
 
         initEvents: function() {
@@ -45,40 +46,43 @@ define(function(require){
         },
 
         calculateGridSize: function(){
-            var targetElementWidth  = this.cellsXCount = this.$targetElement.width();
-            var targetElementHeight = this.cellsYCount = this.$targetElement.height();
+            var targetElementWidth  = this.gridWidth = this.$targetElement.width();
+            var targetElementHeight = this.gridHeight = this.$targetElement.height();
 
             var xDiff = targetElementWidth % this.resolution;
             var yDiff = targetElementHeight % this.resolution;
 
-            xDiff && (this.cellsXCount = targetElementWidth - xDiff + this.resolution);
+            xDiff && (this.gridWidth = targetElementWidth - xDiff + this.resolution);
 
-            yDiff && (this.cellsYCount = targetElementHeight - yDiff + this.resolution);
+            yDiff && (this.gridHeight = targetElementHeight - yDiff + this.resolution);
         },
 
         custructGrid: function(){
-            var xCoordinate = 0;
-            var yCoordinate = 0;
+            var yCellsCount = this.gridHeight / this.resolution;
+            var xCellsCount = this.gridWidth / this.resolution;
 
-            for(var i = 0; i < this.cellsYCount; i += this.resolution){
-                for(var j = 0; j < this.cellsYCount; j += this.resolution){
+            for(var i = 0; i < yCellsCount; i++){
+                for(var j = 0; j < xCellsCount; j++){
 
                     var item = this.cellsCollection.thisItem(new CellModel({
-                        x: xCoordinate,
-                        y: yCoordinate,
+                        x: j,
+                        y: i,
                         resolution: this.resolution  
                     }));
 
                     item.css({
                         width: this.resolution,
-                        height: this.resolution
+                        height: this.resolution,
+                        float: "left"
                     });
 
-                    xCoordinate++;
                 }
-                
-                yCoordinate++;   
             }
+        },
+
+        setGridSize: function(){
+            this.$el.width(this.gridWidth);
+            this.$el.height(this.gridHeight);
         },
 
         onCellClick:function(cellView, model) {
