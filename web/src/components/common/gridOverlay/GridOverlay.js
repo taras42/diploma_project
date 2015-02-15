@@ -141,6 +141,12 @@ define(function(require){
         render: function(){
             this.$parentElement.append(this.$el.append(this.cellsCollection.render().$el));
             return this;
+        },
+
+        remove: function(){
+            this.cellsCollection.remove();
+
+            Backbone.View.prototype.remove.apply(this, arguments);
         }
 
     });
