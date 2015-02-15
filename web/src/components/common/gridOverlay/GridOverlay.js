@@ -8,6 +8,10 @@ define(function(require){
         CellModel = require("./model/CellModel");
         ItemCollection = require("components/common/itemCollection/ItemCollection");
 
+    var defaults = {
+        POSITION_ABSOLUTE: "absolute",
+        ZINDEX: 1000
+    };
 
     var GridOverlay = Backbone.View.extend({
         el: gridTemplate,
@@ -38,7 +42,8 @@ define(function(require){
             this.initEvents();
             this.calculateGridSize();
             this.custructGrid();
-            this.setGridSize();
+            this.setStyles();
+            this.setPosition();
         },
 
         initEvents: function() {
@@ -49,12 +54,12 @@ define(function(require){
             var targetElementWidth  = this.gridWidth = this.$targetElement.width();
             var targetElementHeight = this.gridHeight = this.$targetElement.height();
 
-            var xDiff = targetElementWidth % this.resolution;
-            var yDiff = targetElementHeight % this.resolution;
+            this.xDiff = targetElementWidth % this.resolution;
+            this.yDiff = targetElementHeight % this.resolution;
 
-            xDiff && (this.gridWidth = targetElementWidth - xDiff + this.resolution);
+            this.xDiff && (this.gridWidth = targetElementWidth - this.xDiff + this.resolution);
 
-            yDiff && (this.gridHeight = targetElementHeight - yDiff + this.resolution);
+            this.yDiff && (this.gridHeight = targetElementHeight - this.yDiff + this.resolution);
         },
 
         custructGrid: function(){
@@ -80,9 +85,27 @@ define(function(require){
             }
         },
 
-        setGridSize: function(){
-            this.$el.width(this.gridWidth);
-            this.$el.height(this.gridHeight);
+        setStyles: function(){
+            this.$el.css({
+                position: defaults.POSITION_ABSOLUTE,
+                width: this.gridWidth,
+                height: this.gridHeight,
+                zIndex: defaults.ZINDEX
+            });
+        },
+
+        setPosition: function(){
+            var targetElementOffset = this.$targetElement.offset();
+            var targetElementWidth  = this.$targetElement.width();
+            var targetElementHeight = this.$targetElement.height();
+
+            var top = targetElementOffset.top - Math.floor(((this.gridHeight - targetElementHeight)/2));
+            var left = targetElementOffset.left - Math.floor(((this.gridWidth - targetElementWidth)/2));
+
+            this.$el.css({
+                top: top,
+                left: left
+            });
         },
 
         onCellClick:function(cellView, model) {

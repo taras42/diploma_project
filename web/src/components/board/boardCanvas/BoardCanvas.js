@@ -41,7 +41,6 @@ define(function (require) {
 
 		initGridOverlay: function(){
 			this.gridOverlay = new GridOverlay({
-				parentElement: this.$el,
 				targetElement: this.CAView.$imageResource
 			});
 
