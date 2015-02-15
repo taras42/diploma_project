@@ -79,6 +79,14 @@ define(function(require){
 			// TODO		
 		},
 
+		resetCollection: function(){
+			_.each(this.itemsCollectionView, function(itemView){
+				itemView.remove();
+			});
+
+			this.itemsCollectionView = [];
+		},
+
 		renderItem: function(itemView){
 			this.$el.append(itemView.render().$el);
 		},
@@ -114,6 +122,12 @@ define(function(require){
 			});
 
 			return this;
+		},
+
+		remove: function(){
+			this.resetCollection();
+
+			Backbone.View.prototype.remove.apply(this, arguments);
 		}
 
 	});

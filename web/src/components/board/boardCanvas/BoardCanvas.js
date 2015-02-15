@@ -31,19 +31,18 @@ define(function (require) {
 				parentElement: this.$el
 			});
 
+			this.gridOverlay = new GridOverlay();
+
 			this.initEvents();
 		},
 
 		initEvents: function(){
 			this.listenTo(this.uploadView, "upload:change", this.previewControlledArea);
-			this.listenTo(this.CAView, "image:loaded", this.initGridOverlay);
+			this.listenTo(this.CAView, "image:loaded", this.buildGridOverlay);
 		},
 
-		initGridOverlay: function(){
-			this.gridOverlay = new GridOverlay({
-				targetElement: this.CAView.$imageResource
-			});
-
+		buildGridOverlay: function(CAView){
+			this.gridOverlay.setTargetElement(CAView.$imageResource).buildGrid();
 			this.gridOverlay.render().show();
 		},
 
@@ -52,6 +51,7 @@ define(function (require) {
 
 			this.uploadView.hide();
 			this.CAView.hide();
+			this.gridOverlay.hide();
 
 			imageURL ? this.CAView.setImageResource(imageURL).show() : this.uploadView.show();
 		},
@@ -66,6 +66,10 @@ define(function (require) {
 			this.uploadView.render();
 			this.CAView.render();
 			this.$el.show();
+		},
+
+		_onGridOverlayCellClick: function(cellView, model, coordinates){
+
 		},
 
 		render: function(){

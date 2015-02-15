@@ -17,11 +17,12 @@ define(function(require){
         el: gridTemplate,
 
         constructor: function(options){
+            var options = options || {};
 
             var body = $('body');
 
             this.$parentElement = options.parentElement ?  $(options.parentElement) : body;
-            this.$targetElement = options.targetElement ? $(options.targetElement) : body;
+            this.$targetElement = options.targetElement;
             this.resolution = options.resolution ? options.resolution : 50;
 
             this.cellsCollection = new ItemCollection({
@@ -40,14 +41,24 @@ define(function(require){
 
         initialize: function() {
             this.initEvents();
+            this.$targetElement && this.buildGrid();
+        },
+
+        initEvents: function() {
+            this.listenTo(this.cellsCollection, "item:selected", this.onCellClick);
+        },
+
+        buildGrid: function(){
             this.calculateGridSize();
             this.custructGrid();
             this.setStyles();
             this.setPosition();
         },
 
-        initEvents: function() {
-            this.listenTo(this.cellsCollection, "item:selected", this.onCellClick);
+        setTargetElement: function(targetElement){
+            this.$targetElement = $(targetElement);
+
+            return this;
         },
 
         calculateGridSize: function(){
@@ -63,6 +74,8 @@ define(function(require){
         },
 
         custructGrid: function(){
+            this.cellsCollection.resetCollection();
+
             var yCellsCount = this.gridHeight / this.resolution;
             var xCellsCount = this.gridWidth / this.resolution;
 
