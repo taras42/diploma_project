@@ -64,13 +64,13 @@ define(function(require){
             for(var i = 0; i < yCellsCount; i++){
                 for(var j = 0; j < xCellsCount; j++){
 
-                    var item = this.cellsCollection.thisItem(new CellModel({
+                    var item = this.cellsCollection.addItem(new CellModel({
                         x: j,
                         y: i,
                         resolution: this.resolution  
                     }));
 
-                    item.css({
+                    item.$el.css({
                         width: this.resolution,
                         height: this.resolution,
                         float: "left"
@@ -86,7 +86,12 @@ define(function(require){
         },
 
         onCellClick:function(cellView, model) {
-            this.trigger("cell:selected", cellView, model);
+            var coordinates = {};
+
+            coordinates.x = cellView.$el.children(".gridCell").data("x");
+            coordinates.y = cellView.$el.children(".gridCell").data("y");
+            
+            this.trigger("cell:selected", cellView, model, coordinates);
         },
 
         show: function(){

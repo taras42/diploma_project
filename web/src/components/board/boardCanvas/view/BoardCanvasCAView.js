@@ -25,6 +25,7 @@ define(function (require) {
 		initEvents: function(){
 			var self = this;
 			this.fileReader.addEventListener("load", _.bind(self.saveImageBase64, self)); 
+			this.$imageResource.on("load", _.bind(self._onImageLoaded, self)); 
 		},
 
 		setImageResource: function(resource){
@@ -44,6 +45,10 @@ define(function (require) {
 
 		saveImageBase64: function(FREvent){
 			this.imageBase64 = FREvent.target.result;
+		},
+
+		_onImageLoaded: function(){
+			this.trigger("image:loaded", this);
 		},
 
 		show: function(){
@@ -87,6 +92,7 @@ define(function (require) {
 
 		remove: function(){
 			this.fileReader.removeEventListener("load", this.setImageResourceSrc); 
+			this.$imageResource.off("load", this._onImageLoaded);
 			this.fileReader = null;
 			Backbone.View.prototype.remove.apply(this, arguments);
 		}

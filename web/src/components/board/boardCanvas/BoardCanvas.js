@@ -28,18 +28,24 @@ define(function (require) {
 			});
 
 			this.CAView = new BoardCanvasCAView({
-				parentElement: this.$el,
+				parentElement: this.$el
 			});
-
-			// this.gridOverlay = new GridOverlay({
-
-			// });
 
 			this.initEvents();
 		},
 
 		initEvents: function(){
 			this.listenTo(this.uploadView, "upload:change", this.previewControlledArea);
+			this.listenTo(this.CAView, "image:loaded", this.initGridOverlay);
+		},
+
+		initGridOverlay: function(){
+			this.gridOverlay = new GridOverlay({
+				parentElement: this.$el,
+				targetElement: this.CAView.$imageResource
+			});
+
+			this.gridOverlay.render().show();
 		},
 
 		showControlledArea: function(model){
@@ -72,6 +78,7 @@ define(function (require) {
 		remove: function(){
 			this.uploadView.remove();
 			this.CAView.remove();
+			this.gridOverlay.remove();
 
 			Backbone.View.prototype.remove.apply(this, arguments);
 		}
