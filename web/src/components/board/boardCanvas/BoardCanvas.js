@@ -6,6 +6,8 @@ define(function (require) {
 		BoardCanvasUploadView = require("components/board/boardCanvas/view/BoardCanvasUploadView"),
 		GridOverlay = require("components/common/gridOverlay/GridOverlay"),
 		BoardCanvasCAView = require("components/board/boardCanvas/view/BoardCanvasCAView"),
+		Dialog = require("components/common/dialog/Dialog"),
+		addSensorTemplate = require("text!components/board/boardCanvas/template/boardCanvasAddSensorDialog.htm"),
 		boardCanvasTemplate = require("text!components/board/boardCanvas/template/boardCanvasTemplate.htm");
 
 	require("css!components/board/boardCanvas/css/boardCanvasCss.css");
@@ -33,12 +35,27 @@ define(function (require) {
 
 			this.gridOverlay = new GridOverlay();
 
+			this.addSensorDialog = new Dialog({
+				buttons: [{title: "Add", action: "add", additionalCssClass: ""}, 
+					{title: "Cancel", action: "cancel", additionalCssClass: ""}],
+				model: new Backbone.Model(),
+				content: addSensorTemplate,
+				modal: true,
+				parentContainer: "#mainBoard",
+				title: "Add new sensor",
+				additionalCssClass: "boardCanvasDialog" 
+			});
+
 			this.initEvents();
 		},
 
 		initEvents: function(){
 			this.listenTo(this.uploadView, "upload:change", this.previewControlledArea);
 			this.listenTo(this.CAView, "image:loaded", this.buildGridOverlay);
+			this.listenTo(this.gridOverlay, "cell:selected", this.openAddSensorDialog);
+
+			//this.listenTo(this.addSensorDialog, "button:add", this.addSensor);
+			this.listenTo(this.addSensorDialog, "button:cancel", this.closeAddSensorDialog);
 		},
 
 		buildGridOverlay: function(CAView){
@@ -70,6 +87,14 @@ define(function (require) {
 
 		_onGridOverlayCellClick: function(cellView, model, coordinates){
 
+		},
+
+		openAddSensorDialog: function(){
+			this.addSensorDialog.render().show();
+		},
+
+		closeAddSensorDialog: function(){
+			this.addSensorDialog.hide();
 		},
 
 		render: function(){

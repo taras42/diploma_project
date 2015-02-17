@@ -42,3 +42,7 @@
 	height: 100%;
 	vertical-align: middle;
 }
+
+#mainBoard .boardCanvasDialog input.control.text {
+	width: 310px;
+}

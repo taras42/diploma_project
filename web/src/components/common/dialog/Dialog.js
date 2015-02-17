@@ -54,6 +54,8 @@ define(function(require){
                 eventPrefix: eventPrefix
             });
 
+            this.isRendered = false;
+
             this.additionalCssClass = options.additionalCssClass || ""
             this.content = options.content;
 
@@ -127,10 +129,15 @@ define(function(require){
         },
 
 		render: function(){
-            this.dimmer && this.dimmer.render();
-            $(this.parentContainer).append(this.$el);
-            this.setPosition();
-            return this;
+            
+            if(!this.isRendered){
+                this.dimmer && this.dimmer.render();
+                $(this.parentContainer).append(this.$el);
+                this.setPosition();
+                this.isRendered = true;
+            }
+
+            return this;    
 		},
 
         remove: function(){
