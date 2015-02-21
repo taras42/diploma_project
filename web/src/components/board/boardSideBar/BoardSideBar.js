@@ -82,7 +82,8 @@ define(function(require){
 
 			this.controlledAreasViewCollection.renderItem(item);
 
-			model.save();
+			this.selectControlledArea(item, model);
+
 			self.addCADialog.hide().remove();	
 		},
 

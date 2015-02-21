@@ -45,7 +45,7 @@ define(function(require){
         },
 
         initEvents: function() {
-            this.listenTo(this.cellsCollection, "item:selected", this.onCellClick);
+            this.listenTo(this.cellsCollection, "item:dblclick", this.onCellDblClick);
         },
 
         buildGrid: function(){
@@ -121,7 +121,7 @@ define(function(require){
             });
         },
 
-        onCellClick:function(cellView, model) {
+        onCellDblClick:function(cellView, model) {
             var coordinates = {};
 
             coordinates.x = cellView.$el.children(".gridCell").data("x");

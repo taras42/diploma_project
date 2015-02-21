@@ -16,6 +16,7 @@ define(function(require){
 
 		events: {
 			"click .item": "_onItemEvent",
+			"dblclick .item": "_onItemEvent",
 			"mouseenter .item": "_onItemEvent",
 			"mouseleave .item": "_onItemEvent"
 		},

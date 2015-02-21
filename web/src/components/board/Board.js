@@ -48,6 +48,10 @@ define(function(require){
 			this.boardCanvas.$el.css("width", this.$el.width() - this.sideBar.$el.outerWidth() - canvasLeftBorderWidth);
 		},
 
+		saveCA: function(){
+			
+		},
+
 		renderCanvas: function(){
 			this.boardCanvas.render();
 			this.setCanvasWidth();
