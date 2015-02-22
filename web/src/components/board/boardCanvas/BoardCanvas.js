@@ -5,9 +5,11 @@ define(function (require) {
 		$ = require("jquery"),
 		BoardCanvasUploadView = require("components/board/boardCanvas/view/BoardCanvasUploadView"),
 		GridOverlay = require("components/common/gridOverlay/GridOverlay"),
+		SensorsCollection = require("components/board/collection/SensorsCollection"),
+		SensorModel = require("components/board/model/SensorModel"),
 		BoardCanvasCAView = require("components/board/boardCanvas/view/BoardCanvasCAView"),
 		Dialog = require("components/common/dialog/Dialog"),
-		addSensorTemplate = require("text!components/board/boardCanvas/template/boardCanvasAddSensorDialog.htm"),
+		addSensorTemplate = require("text!components/board/boardCanvas/template/boardCanvasAddSensorDialogTemplate.htm"),
 		boardCanvasTemplate = require("text!components/board/boardCanvas/template/boardCanvasTemplate.htm");
 
 	require("css!components/board/boardCanvas/css/boardCanvasCss.css");
@@ -33,12 +35,18 @@ define(function (require) {
 				parentElement: this.$el
 			});
 
-			this.gridOverlay = new GridOverlay();
+			this.sensorsCollection = new SensorsCollection([]);
+
+			this.gridOverlay = new GridOverlay({
+				gridAdditionalCssClass: "noselect"
+			});
+
+			this.tempPropertiesModel = new Backbone.Model();
 
 			this.addSensorDialog = new Dialog({
 				buttons: [{title: "Add", action: "add", additionalCssClass: ""}, 
 					{title: "Cancel", action: "cancel", additionalCssClass: ""}],
-				model: new Backbone.Model(),
+				model: new SensorModel(),
 				content: addSensorTemplate,
 				modal: true,
 				parentContainer: "#mainBoard",
@@ -52,9 +60,9 @@ define(function (require) {
 		initEvents: function(){
 			this.listenTo(this.uploadView, "upload:change", this.previewControlledArea);
 			this.listenTo(this.CAView, "image:loaded", this.buildGridOverlay);
-			this.listenTo(this.gridOverlay, "cell:selected", this.openAddSensorDialog);
+			this.listenTo(this.gridOverlay, "cell:dblclick", this.openAddSensorDialog);
 
-			//this.listenTo(this.addSensorDialog, "button:add", this.addSensor);
+			this.listenTo(this.addSensorDialog, "button:add", this.addSensor);
 			this.listenTo(this.addSensorDialog, "button:cancel", this.closeAddSensorDialog);
 		},
 
@@ -85,11 +93,24 @@ define(function (require) {
 			this.$el.show();
 		},
 
-		_onGridOverlayCellClick: function(cellView, model, coordinates){
+		addSensor: function(dialog, model){
+			var cellView  = this.tempPropertiesModel.get("sensorCell");
 
+			this.sensorsCollection.add(model, {merge: true});
+			this.addSensorDialog.hide();
 		},
 
-		openAddSensorDialog: function(){
+		findSensorByCoordinates: function(coordinates){
+			return this.sensorsCollection.findWhere(coordinates);
+		},
+
+		openAddSensorDialog: function(cellView, model, coordinates){
+			var sensorModel = this.findSensorByCoordinates(coordinates);
+
+			sensorModel ? this.addSensorDialog.refresh(sensorModel) : this.addSensorDialog.refresh(new SensorModel(coordinates));
+
+			this.tempPropertiesModel.set("sensorCell", cellView);
+
 			this.addSensorDialog.render().show();
 		},
 
@@ -107,6 +128,7 @@ define(function (require) {
 			this.uploadView.remove();
 			this.CAView.remove();
 			this.gridOverlay.remove();
+			this.tempPropertiesModel.clear();
 
 			Backbone.View.prototype.remove.apply(this, arguments);
 		}

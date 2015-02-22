@@ -57,7 +57,7 @@ define(function(require){
             this.isRendered = false;
 
             this.additionalCssClass = options.additionalCssClass || ""
-            this.content = options.content;
+            this.contentTemplate = options.content;
 
             _.each(options.buttons, function(buttonObj){
                 self.listenTo(self.buttons, eventPrefix +":"+ buttonObj.action, function(){
@@ -71,13 +71,14 @@ define(function(require){
         initialize: function(){
             this.setZIndex();
 
-            this.content = this.content instanceof Backbone.View ? view.render().$el : _.template(this.content)({model: this.model});
-            this.$el.find(".content").append(this.content);
+            this.renderContent();
             this.$el.find(".footer").append(this.buttons.render().$el);
         },
 
         setModel: function(model){
             this.model = model;
+
+            return this;
         },
 
         setZIndex: function(){
@@ -104,10 +105,18 @@ define(function(require){
             });
         },
 
-        refresh: function(){
-            var content = this.content instanceof Backbone.View ? view.render().$el : _.template(this.content)({model: this.model});
-           
-            this.$el.find(".content").empty().append(content);
+        renderContent: function(content){
+            var content  = content ? content : this.contentTemplate;
+
+            var html = content instanceof Backbone.View ? content.render().$el : _.template(this.contentTemplate)({model: this.model.toJSON()});
+
+            this.$el.find(".content").empty().append(html);
+
+            return this;
+        },
+
+        refresh: function(model){
+            this.setModel(model).renderContent();
         },
 
         onChange: function(event){
@@ -129,7 +138,6 @@ define(function(require){
         },
 
 		render: function(){
-            
             if(!this.isRendered){
                 this.dimmer && this.dimmer.render();
                 $(this.parentContainer).append(this.$el);

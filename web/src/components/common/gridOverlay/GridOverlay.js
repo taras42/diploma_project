@@ -26,8 +26,8 @@ define(function(require){
             this.resolution = options.resolution ? options.resolution : 50;
 
             this.cellsCollection = new ItemCollection({
-                additionalCssClass: options.gridAdditionCssClass || "",
-                itemAdditionalCssClass: options.cellAdditionCssClass || "",
+                additionalCssClass: options.gridAdditionalCssClass || "",
+                itemAdditionalCssClass: options.cellAdditionalCssClass || "",
                 itemTemplate: cellTemplate,
                 model: CellModel,
                 items: []
@@ -127,7 +127,7 @@ define(function(require){
             coordinates.x = cellView.$el.children(".gridCell").data("x");
             coordinates.y = cellView.$el.children(".gridCell").data("y");
             
-            this.trigger("cell:selected", cellView, model, coordinates);
+            this.trigger("cell:dblclick", cellView, model, coordinates);
         },
 
         show: function(){

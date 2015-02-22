@@ -19,6 +19,7 @@ define(function (require) {
 			this.fileReader = new FileReader();
 			this.imageBase64 = "";
 			this.$imageResource = this.$el.find('.imageResource');
+
 			this.initEvents();
 		},
 
