@@ -10,6 +10,7 @@ define(function (require) {
 		BoardCanvasCAView = require("components/board/boardCanvas/view/BoardCanvasCAView"),
 		Dialog = require("components/common/dialog/Dialog"),
 		addSensorTemplate = require("text!components/board/boardCanvas/template/boardCanvasAddSensorDialogTemplate.htm"),
+		sensorTemplate = require("text!components/board/boardCanvas/template/sensorTemplate.htm")
 		boardCanvasTemplate = require("text!components/board/boardCanvas/template/boardCanvasTemplate.htm");
 
 	require("css!components/board/boardCanvas/css/boardCanvasCss.css");
@@ -95,6 +96,8 @@ define(function (require) {
 
 		addSensor: function(dialog, model){
 			var cellView  = this.tempPropertiesModel.get("sensorCell");
+
+			cellView.$el.append(sensorTemplate);
 
 			this.sensorsCollection.add(model, {merge: true});
 			this.addSensorDialog.hide();

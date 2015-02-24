@@ -46,3 +46,10 @@
 #mainBoard .boardCanvasDialog input.control.text {
 	width: 310px;
 }
+
+.grid .sensor{
+	width: 100%;
+	height: 100%;
+	background-color: red;
+	border-radius: 50%;	
+}
