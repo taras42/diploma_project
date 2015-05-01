@@ -15,7 +15,8 @@ define(function(require){
 	var Dialog = Backbone.View.extend({
 
         events: {
-            "keyup input[type='text'], input[type='checkbox'], input[type='radio']": "onChange"
+            "keyup input[type='text'], input[type='checkbox'], input[type='radio']": "onChange",
+            "change input[type='text'], input[type='checkbox'], input[type='radio']": "onChange"
         },
 
         template: dialogTemplate,
