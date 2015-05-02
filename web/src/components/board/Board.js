@@ -18,14 +18,6 @@ define(function(require){
 
 			this.socket = io.connect();
 
-			this.socket.on("connect", function(){
-				console.log('connected');
-			});
-
-			this.socket.on("triggers_sensors_data", function(data){
-				console.log(data);
-			});
-
 			this.sideBar = new BoardSideBar({
 				parentElement: this.$el
 			});
@@ -46,6 +38,14 @@ define(function(require){
 
 			$(window).on("resize", function(){
 				self.setCanvasWidth();
+			});
+
+			this.socket.on("connect", function(){
+				console.log('connected');
+			});
+
+			this.socket.on("triggers_sensors_data", function(data){
+				console.log(data);
 			});
 		},
 
