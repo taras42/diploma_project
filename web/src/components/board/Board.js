@@ -3,6 +3,7 @@ define(function(require){
 	var Backbone = require("backbone"),
 		_ = require("underscore"),
 		$  = require("jquery"),
+		io = require("socket.io"),
 		BoardSideBar = require("components/board/boardSideBar/BoardSideBar"),
 		BoardCanvas = require("components/board/boardCanvas/BoardCanvas"),
 		boardTemplate = require('text!components/board/template/boardTemplate.htm');
@@ -14,6 +15,16 @@ define(function(require){
 		el: boardTemplate,
 
 		initialize: function(){
+
+			this.socket = io.connect();
+
+			this.socket.on("connect", function(){
+				console.log('connected');
+			});
+
+			this.socket.on("triggers_sensors_data", function(data){
+				console.log(data);
+			});
 
 			this.sideBar = new BoardSideBar({
 				parentElement: this.$el

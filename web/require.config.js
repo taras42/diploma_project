@@ -6,6 +6,6 @@ require.config({
         text: 'lib/requirejs-text/text',
         backbone: 'lib/backbone/backbone',
         css: 'lib/require-css/css',
-        'socket.io-client': 'lib/socket.io-client/socket.io'
+        'socket.io': 'lib/socket.io-client/socket.io'
     }
 });

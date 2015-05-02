@@ -3,3 +3,4 @@ web/src/lib/
 *.log
 bin/www
 config/config.json
+npm-debug.log

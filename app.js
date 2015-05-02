@@ -5,6 +5,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var http = require('http');
+var models = require("./models");
+
+var app = express();
+
+var server = http.createServer(app);
+var io = require("socket.io")(server);
 
 // Routes
 
@@ -13,8 +20,7 @@ var users = require('./routes/users');
 var sensors = require('./routes/sensors');
 var controlledAreas = require('./routes/controlledAreas');
 var controlledArea = require('./routes/controlledArea');
-
-var app = express();
+var ioRoutes = require('./routes/io');
 
 // view engine setup
 app.engine('html', cons.underscore);
@@ -38,6 +44,7 @@ app.use('/users', users);
 app.use('/sensors', sensors);
 app.use('/controlledAreas', controlledAreas);
 app.use('/controlledArea', controlledArea);
+app.use('/io', ioRoutes(io));
 
 // #################################################
 
@@ -69,6 +76,24 @@ app.use(function(err, req, res, next) {
     res.render('error', {
         message: err.message,
         error: {}
+    });
+});
+
+app.set('port', process.env.PORT || 3000);
+
+models.sequelize.sync().then(function () {
+
+    server.listen(app.get('port'), function(){
+        console.log('Express server listening on port ' + app.get('port'));
+    });
+
+    io.on('connection', function (socket) {
+      
+      console.log('connected');
+
+      socket.on('sensor:trigger', function (data) {
+        console.log(data);
+      });
     });
 });
 
