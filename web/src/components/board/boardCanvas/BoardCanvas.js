@@ -10,6 +10,7 @@ define(function (require) {
 		BoardCanvasCAView = require("components/board/boardCanvas/view/BoardCanvasCAView"),
 		Dialog = require("components/common/dialog/Dialog"),
 		addSensorTemplate = require("text!components/board/boardCanvas/template/boardCanvasAddSensorDialogTemplate.htm"),
+		ItemCollection = require("components/common/itemCollection/ItemCollection"),
 		sensorTemplate = require("text!components/board/boardCanvas/template/sensorTemplate.htm")
 		boardCanvasTemplate = require("text!components/board/boardCanvas/template/boardCanvasTemplate.htm");
 
@@ -95,9 +96,12 @@ define(function (require) {
 		},
 
 		addSensor: function(dialog, model){
-			var cellView  = this.tempPropertiesModel.get("sensorCell");
+			var cellView  = this.tempPropertiesModel.get("sensorCell"),
+				$sensorTemplate = $(sensorTemplate);
 
-			cellView.$el.append(sensorTemplate);
+			model.$el = $sensorTemplate;
+
+			cellView.$el.append($sensorTemplate);
 
 			this.sensorsCollection.add(model, {merge: true});
 			this.addSensorDialog.hide();
@@ -105,6 +109,10 @@ define(function (require) {
 
 		findSensorByCoordinates: function(coordinates){
 			return this.sensorsCollection.findWhere(coordinates);
+		},
+
+		findSensorBySensorId: function(sensor_id){
+			return this.sensorsCollection.findWhere({sensor_id: sensor_id});
 		},
 
 		openAddSensorDialog: function(cellView, model, coordinates){

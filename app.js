@@ -88,12 +88,7 @@ models.sequelize.sync().then(function () {
     });
 
     io.on('connection', function (socket) {
-      
       console.log('connected');
-
-      socket.on('sensor:trigger', function (data) {
-        console.log(data);
-      });
     });
 });
 

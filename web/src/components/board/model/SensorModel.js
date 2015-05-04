@@ -8,7 +8,8 @@ define(function (require){
 			x: 0,
 			y: 0,
 			description: "",
-			title: ""
+			title: "",
+			sensor_id: ""
 		}
 	});
 
