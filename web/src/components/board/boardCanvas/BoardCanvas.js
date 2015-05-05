@@ -37,7 +37,11 @@ define(function (require) {
 				parentElement: this.$el
 			});
 
-			this.sensorsCollection = new SensorsCollection([]);
+			this.sensorsCollection = new ItemCollection({
+				itemTemplate: sensorTemplate,
+				itemAdditionalCssClass: "sensor",
+				model: SensorModel
+			});
 
 			this.gridOverlay = new GridOverlay({
 				gridAdditionalCssClass: "noselect"
@@ -96,23 +100,21 @@ define(function (require) {
 		},
 
 		addSensor: function(dialog, model){
-			var cellView  = this.tempPropertiesModel.get("sensorCell"),
-				$sensorTemplate = $(sensorTemplate);
+			var cellView  = this.tempPropertiesModel.get("sensorCell");
 
-			model.$el = $sensorTemplate;
+			var sensorView = this.sensorsCollection.addItem(model, {merge: true});
 
-			cellView.$el.append($sensorTemplate);
+			cellView.$el.append(sensorView.render().$el);
 
-			this.sensorsCollection.add(model, {merge: true});
 			this.addSensorDialog.hide();
 		},
 
 		findSensorByCoordinates: function(coordinates){
-			return this.sensorsCollection.findWhere(coordinates);
+			return this.sensorsCollection.findBy(coordinates);
 		},
 
 		findSensorBySensorId: function(sensor_id){
-			return this.sensorsCollection.findWhere({sensor_id: sensor_id});
+			return this.sensorsCollection.findBy({sensor_id: sensor_id});
 		},
 
 		openAddSensorDialog: function(cellView, model, coordinates){

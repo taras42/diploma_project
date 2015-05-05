@@ -76,6 +76,25 @@ define(function(require){
 			return itemView;
 		},
 
+		findBy: function(criteria){
+			var criteriaKeys = _.pairs(criteria),
+				criteriaKeysLength  = criteriaKeys.length;
+
+			return _.find(this.itemsCollectionView, function(itemView){
+				var isEqual;
+
+				for(var i = 0; i < criteriaKeysLength; i++){
+					if(itemView.model.get(criteriaKeys[i][0]) === criteriaKeys[i][1]){
+						isEqual = true;
+					}else{
+						break;
+					}
+				}
+
+				return isEqual && itemView;
+			});
+		},
+
 		removeItem: function(){
 			// TODO		
 		},

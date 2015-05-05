@@ -48,12 +48,12 @@ define(function(require){
 				var blinkCount = 0;
 
 				console.log(sensorData);
-				var model = self.boardCanvas.findSensorBySensorId(sensorData.data.remote64);
+				var itemView = self.boardCanvas.findSensorBySensorId(sensorData.data.remote64);
 
-				if(model){
+				if(itemView){
 					var blink = setInterval(function(){
 						blinkCount += 1;
-						model.$el.toggleClass("hide");
+						itemView.$el.toggleClass("hide");
 
 						(blinkCount > 5) && clearInterval(blink);
 					}, 1000);
