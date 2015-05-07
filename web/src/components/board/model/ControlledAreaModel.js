@@ -10,7 +10,7 @@ define(function(require){
 			title: "",
 			sensors: []
 		},
-		url: "/controlledArea"
+		url: "/controlledArea",
 
 		addSensor: function(sensorModel){
 			this.get("sensors").push(sensorModel.toJSON());
