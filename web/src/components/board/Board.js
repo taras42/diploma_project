@@ -4,6 +4,7 @@ define(function(require){
 		_ = require("underscore"),
 		$  = require("jquery"),
 		io = require("socket.io"),
+		ControlledAreasCollection = require("components/board/collection/ControlledAreasCollection"),
 		BoardSideBar = require("components/board/boardSideBar/BoardSideBar"),
 		BoardCanvas = require("components/board/boardCanvas/BoardCanvas"),
 		boardTemplate = require('text!components/board/template/boardTemplate.htm');
@@ -15,6 +16,7 @@ define(function(require){
 		el: boardTemplate,
 
 		initialize: function(){
+			var self = this;
 
 			this.socket = io.connect();
 
@@ -27,6 +29,10 @@ define(function(require){
 			});
 
 			this.initEvents();
+
+			this.initControlledAreasCollection().then(function(collection, response){
+				self.sideBar.setCollection(self.controlledAreasCollection);
+			});
 
 			this.render();
 		},
@@ -61,6 +67,14 @@ define(function(require){
 			});
 		},
 
+		initControlledAreasCollection: function(){
+			var self = this;
+
+			this.controlledAreasCollection = new ControlledAreasCollection([]);
+
+			return this.controlledAreasCollection.fetch();
+		},
+
 		_onItemSelect: function(sideBar, itemView){
 			this.selectedControlledArea = itemView;
 			this.boardCanvas.showControlledArea(itemView.model);
@@ -71,7 +85,7 @@ define(function(require){
 			this.boardCanvas.$el.css("width", this.$el.width() - this.sideBar.$el.outerWidth() - canvasLeftBorderWidth);
 		},
 
-		saveCA: function(){
+		save: function(){
 			
 		},
 

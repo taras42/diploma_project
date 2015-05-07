@@ -5,7 +5,6 @@ define(function(require){
 		$ = require("jquery"),
 		Item = require("components/common/item/Item"),
 		ControlledAreaModel = require("components/board/model/ControlledAreaModel"),
-		ControlledAreasCollection = require("components/board/collection/ControlledAreasCollection"),
 		Dialog = require("components/common/dialog/Dialog"),
 		ItemCollection = require("components/common/itemCollection/ItemCollection"),
 		boardSideBarTemplate = require("text!components/board/boardSideBar/template/boardSideBarTemplate.htm"),
@@ -26,6 +25,8 @@ define(function(require){
 
 			this.addCAButton = new Item({itemTemplate: addCAButtonTemplate});
 
+			this.controlledAreasCollection = options.controlledAreasCollection;
+
 			this.controlledAreasViewCollection = new ItemCollection({
 					additionalCssClass: "controlledAreas",
 					itemAdditionalCssClass: "controlledArea",
@@ -44,8 +45,6 @@ define(function(require){
 			this.footer = this.$el.find(".footer");
 
 			this.initEvents();
-
-			this.initControlledAreasCollection();
 		},
 
 		initEvents: function(){
@@ -60,17 +59,15 @@ define(function(require){
 			});
 		},
 
-		initControlledAreasCollection: function(){
+		setCollection: function(collection){
 			var self = this;
 
-			this.controlledAreasCollection = new ControlledAreasCollection([]);
+			this.controlledAreasCollection = collection;
 
-			this.controlledAreasCollection.fetch().then(function(collection, response){
-				_.each(self.controlledAreasCollection.models, function(model){
-					var item = self.controlledAreasViewCollection.addItem(model);
-					self.controlledAreasViewCollection.renderItem(item);
-				});
-			});
+			_.each(this.controlledAreasCollection.models, function(model){
+				var item = self.controlledAreasViewCollection.addItem(model);
+				self.controlledAreasViewCollection.renderItem(item);
+			});			
 		},
 
 		addControlledArea: function(dialog, model){
