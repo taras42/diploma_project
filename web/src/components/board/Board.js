@@ -16,16 +16,17 @@ define(function(require){
 		el: boardTemplate,
 
 		initialize: function(){
-			var self = this;
+			var self = this,
+				body = this.$el.find('.body');
 
 			this.socket = io.connect();
 
 			this.sideBar = new BoardSideBar({
-				parentElement: this.$el
+				parentElement: body
 			});
 
 			this.boardCanvas = new BoardCanvas({
-				parentElement: this.$el
+				parentElement: body
 			});
 
 			this.initEvents();
@@ -41,10 +42,6 @@ define(function(require){
 			var self = this;
 
 			this.listenTo(this.sideBar, "item:select", this._onItemSelect);
-
-			$(window).on("resize", function(){
-				self.setCanvasWidth();
-			});
 
 			this.socket.on("connect", function(){
 				console.log('connected');
@@ -80,18 +77,12 @@ define(function(require){
 			this.boardCanvas.showControlledArea(itemView.model);
 		},
 
-		setCanvasWidth: function(){
-			var canvasLeftBorderWidth = parseInt(this.boardCanvas.$el.css("borderLeftWidth"));
-			this.boardCanvas.$el.css("width", this.$el.width() - this.sideBar.$el.outerWidth() - canvasLeftBorderWidth);
-		},
-
 		save: function(){
 			
 		},
 
 		renderCanvas: function(){
 			this.boardCanvas.render();
-			this.setCanvasWidth();
 			this.boardCanvas.show();
 		},
 

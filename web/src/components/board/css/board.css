@@ -5,6 +5,10 @@
 	position: absolute;
 }
 
+#mainBoard .body{
+	margin-left: 300px;
+  	height: 100%;
+}
 
 .boardSideBarDialog input.control.text{
 	width: 310px;

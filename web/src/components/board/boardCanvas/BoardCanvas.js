@@ -14,7 +14,7 @@ define(function (require) {
 		sensorTemplate = require("text!components/board/boardCanvas/template/sensorTemplate.htm")
 		boardCanvasTemplate = require("text!components/board/boardCanvas/template/boardCanvasTemplate.htm");
 
-	require("css!components/board/boardCanvas/css/boardCanvasCss.css");
+	require("css!components/board/boardCanvas/css/boardCanvas.css");
 
 	var BoardCanvas = Backbone.View.extend({
 

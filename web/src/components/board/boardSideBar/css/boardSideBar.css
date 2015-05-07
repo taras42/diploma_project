@@ -4,6 +4,8 @@
 	height: 100%;
 	float: left;
 	border-right: 1px solid #1C1C1C;
+	box-sizing: border-box;
+  	margin-left: -300px;
 }
 
 #mainBoard #boardSideBar .content{

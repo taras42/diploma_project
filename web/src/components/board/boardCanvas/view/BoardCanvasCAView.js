@@ -2,6 +2,7 @@ define(function (require) {
 	
 	var Backbone = require("backbone"),
 		_ = require("underscore"),
+		boardSettings = require('components/board/boardSettings/boardSettings'),
 		boardCanvasCAViewTemplate = require("text!components/board/boardCanvas/template/boardCanvasCATemplate.htm");
 
 	var defautls = {
@@ -72,7 +73,7 @@ define(function (require) {
 
 			this.$el.css({
 				height: height,
-				width: width,
+				width: width - boardSettings.SIDE_BAR_WIDTH,
 				top: defautls.OFFSET_TOP,
 				left: defautls.OFFSET_LEFT
 			});
