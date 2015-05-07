@@ -5,8 +5,22 @@ define(function(require){
 
 	require("css!components/board/boardToolbar/css/boardToolbar.css");
 
-	var BoardToolbar = new Backbone.View.extend({
-		el: boardToolbarTemplate
+	var BoardToolbar = Backbone.View.extend({
+		el: boardToolbarTemplate,
+
+		constructor: function(options){
+			this.options = options;
+
+			this.parentElement = options.parentElement ?  $(options.parentElement) : $('body');
+
+			Backbone.View.apply(this, arguments);
+		},
+
+		render: function(){
+			this.parentElement.append(this.$el);
+
+			return this;
+		}
 	});
 
 	return BoardToolbar;

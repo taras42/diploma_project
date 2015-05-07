@@ -21,7 +21,7 @@ define(function(require){
 		constructor: function(options){
 			this.options = options;
 
-			this.perentElement = options.parentElement ?  $(options.parentElement) : $('body');
+			this.parentElement = options.parentElement ?  $(options.parentElement) : $('body');
 
 			this.addCAButton = new Item({itemTemplate: addCAButtonTemplate});
 
@@ -132,7 +132,7 @@ define(function(require){
 			this.content.append(this.controlledAreasViewCollection.render().$el);
 			this.footer.append(this.addCAButton.render().$el);
 
-			this.perentElement.append(this.$el);
+			this.parentElement.append(this.$el);
 
 			return this;
 		},

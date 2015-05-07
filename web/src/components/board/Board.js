@@ -7,6 +7,7 @@ define(function(require){
 		ControlledAreasCollection = require("components/board/collection/ControlledAreasCollection"),
 		BoardSideBar = require("components/board/boardSideBar/BoardSideBar"),
 		BoardCanvas = require("components/board/boardCanvas/BoardCanvas"),
+		BoardToolbar = require("components/board/boardToolbar/BoardToolbar"),
 		boardTemplate = require('text!components/board/template/boardTemplate.htm');
 
 	require("css!components/board/css/board.css");
@@ -20,6 +21,10 @@ define(function(require){
 				body = this.$el.find('.body');
 
 			this.socket = io.connect();
+
+			this.boardToolbar = new BoardToolbar({
+				parentElement: body
+			});
 
 			this.sideBar = new BoardSideBar({
 				parentElement: body
@@ -88,6 +93,7 @@ define(function(require){
 
 		render: function(){
 			$('body').append(this.$el);
+			this.boardToolbar.render();
 			this.sideBar.render().show();
 			this.renderCanvas();
 		},
