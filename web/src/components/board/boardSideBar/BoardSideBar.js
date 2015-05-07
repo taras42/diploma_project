@@ -53,10 +53,6 @@ define(function(require){
 			this.listenTo(this.addCAButton, "select", this.showAddControlledAreaDialog);
 			this.listenTo(this.controlledAreasViewCollection, "item:mouseenter item:mouseleave", this.toggleControlledAreaStyle);
 			this.listenTo(this.controlledAreasViewCollection, "item:selected", this.selectControlledArea);
-
-			$(window).on("resize", function(){
-				self.setContentHeight();
-			});
 		},
 
 		setCollection: function(collection){
@@ -98,14 +94,6 @@ define(function(require){
 			itemView.$el.toggleClass("hovered");
 		},
 
-		setContentHeight: function(){
-			var bodyHeight = $('body').height();
-
-			this.content.css({
-				"height": (bodyHeight - this.header.height() - this.footer.height()) + "px"
-			});
-		},
-
 		showAddControlledAreaDialog: function(){
 			this.addCADialog = new Dialog({
 				buttons: [{title: "Add", action: "add", additionalCssClass: ""}, 
@@ -138,7 +126,6 @@ define(function(require){
 		},
 
 		show: function(){
-			this.setContentHeight();
 			this.$el.show();
 		},
 

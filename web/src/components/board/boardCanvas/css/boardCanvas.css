@@ -7,6 +7,9 @@
 	border-top: 1px solid #494949;
 	overflow: auto;
 	box-sizing: border-box;
+    -moz-box-sizing: border-box; 
+    -ms-box-sizing: border-box
+    -webkit-box-sizing: border-box;
 }
 
 #mainBoard #boardCanvas .fileUpload {
