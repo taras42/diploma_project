@@ -47,6 +47,9 @@ define(function(require){
 			var self = this;
 
 			this.listenTo(this.sideBar, "item:select", this._onItemSelect);
+			this.listenTo(this.boardToolbar, "button:save", _.bind(this._onToolbarSave, this));
+			this.listenTo(this.boardCanvas, "sensor:added", _.bind(this._onSensorAdded, this));
+			this.listenTo(this.boardCanvas, "canvas:ready", _.bind(this._onCanvasReady, this));
 
 			this.socket.on("connect", function(){
 				console.log('connected');
@@ -77,13 +80,21 @@ define(function(require){
 			return this.controlledAreasCollection.fetch();
 		},
 
+		_onCanvasReady: function(canvas, CAView){
+			this.selectedControlledArea.model.set("base64Image", CAView.imageBase64);
+		},
+
 		_onItemSelect: function(sideBar, itemView){
 			this.selectedControlledArea = itemView;
 			this.boardCanvas.showControlledArea(itemView.model);
 		},
 
-		save: function(){
-			
+		_onSensorAdded: function(sensorView){
+			this.selectedControlledArea.model.addSensor(sensorView.model);
+		},
+
+		_onToolbarSave: function(toolbar, buttonView){
+			this.selectedControlledArea.model.save();
 		},
 
 		renderCanvas: function(){

@@ -5,7 +5,6 @@ define(function (require) {
 		$ = require("jquery"),
 		BoardCanvasUploadView = require("components/board/boardCanvas/view/BoardCanvasUploadView"),
 		GridOverlay = require("components/common/gridOverlay/GridOverlay"),
-		SensorsCollection = require("components/board/collection/SensorsCollection"),
 		SensorModel = require("components/board/model/SensorModel"),
 		BoardCanvasCAView = require("components/board/boardCanvas/view/BoardCanvasCAView"),
 		Dialog = require("components/common/dialog/Dialog"),
@@ -75,6 +74,8 @@ define(function (require) {
 		buildGridOverlay: function(CAView){
 			this.gridOverlay.setTargetElement(CAView.$imageResource).buildGrid();
 			this.gridOverlay.render().show();
+
+			this.trigger("canvas:ready", this, this.CAView);
 		},
 
 		showControlledArea: function(model){
@@ -106,6 +107,8 @@ define(function (require) {
 
 			cellView.$el.append(sensorView.render().$el);
 
+			this.trigger("sensor:added", sensorView);
+
 			this.addSensorDialog.hide();
 		},
 
@@ -118,9 +121,9 @@ define(function (require) {
 		},
 
 		openAddSensorDialog: function(cellView, model, coordinates){
-			var sensorModel = this.findSensorByCoordinates(coordinates);
+			var sensorView = this.findSensorByCoordinates(coordinates);
 
-			sensorModel ? this.addSensorDialog.refresh(sensorModel) : this.addSensorDialog.refresh(new SensorModel(coordinates));
+			sensorView ? this.addSensorDialog.refresh(sensorView.model) : this.addSensorDialog.refresh(new SensorModel(coordinates));
 
 			this.tempPropertiesModel.set("sensorCell", cellView);
 

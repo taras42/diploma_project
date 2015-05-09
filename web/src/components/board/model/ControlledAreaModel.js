@@ -6,6 +6,7 @@ define(function(require){
 	var ControlledAreaModel = Backbone.Model.extend({
 		defaults: {
 			image: "",
+			base64Image: "",
 			description: "",
 			title: "",
 			sensors: []

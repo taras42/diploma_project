@@ -16,7 +16,6 @@ var io = require("socket.io")(server);
 // Routes
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
 var sensors = require('./routes/sensors');
 var controlledAreas = require('./routes/controlledAreas');
 var controlledArea = require('./routes/controlledArea');
@@ -40,7 +39,6 @@ app.use(express.static(path.join(__dirname, 'web')));
 // mapping routes prefixes
 
 app.use('/', routes);
-app.use('/users', users);
 app.use('/sensors', sensors);
 app.use('/controlledAreas', controlledAreas);
 app.use('/controlledArea', controlledArea);
@@ -81,7 +79,7 @@ app.use(function(err, req, res, next) {
 
 app.set('port', process.env.PORT || 3000);
 
-models.sequelize.sync().then(function () {
+models.sequelize.sync({force: true}).then(function () {
 
     server.listen(app.get('port'), function(){
         console.log('Express server listening on port ' + app.get('port'));
