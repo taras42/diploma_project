@@ -11,45 +11,48 @@ var _ = require('underscore');
 /* create ControlledArea */
 
 router.post('/', function(req, res) {
-  var controlledAreaObj = req.body;
+  	var controlledAreaObj = req.body,
+	    imageName = utils.generateImageName(controlledArea.id, "png"),
+		sensorsObjects = controlledAreaObj.sensors,
+		base64Data = controlledAreaObj.base64Image && utils.getBase64Data(controlledAreaObj.base64Image);
+		imagePath = settings.IMAGE_PATH + "/" + imageName;
 
-  ControlledArea.create(_.omit(controlledAreaObj, ["base64Image", "sensors"])).then(function(controlledArea){
-  	if(controlledAreaObj.base64Image){
-  		var imageName = utils.generateImageName(controlledArea.id, "png"),
-  			sensorsObjects = controlledAreaObj.sensors,
-  			base64Data = utils.getBase64Data(controlledAreaObj.base64Image);
-  			imagePath = settings.IMAGE_PATH + "/" + imageName;
+	controlledAreaObj.image = base64Data && imagePath;
+  
+  	ControlledArea.create(_.omit(controlledAreaObj, ["base64Image", "sensors"])).then(function(controlledArea){
+	  	if (base64Data) {
+	  		fs.writeFile(path.resolve(settings.PUBLIC_FOLDER + imagePath), base64Data, 'base64', function(err) {
+				if (err) {
+					res.send("Error");
+					return;	
+				}
 
-  		fs.writeFile(path.resolve(settings.PUBLIC_FOLDER + imagePath), base64Data, 'base64', function(err) {
-			if(err){
-				res.send("Error");
-				return;	
-			}
-			if(sensorsObjects){
-				var sensors = _.map(sensorsObjects, function(sensor){
-					sensor.ControlledAreaId = controlledArea.id;
-					return sensor;
-				});
+				if (sensorsObjects) {
+					var sensors = _.map(sensorsObjects, function(sensor){
+						sensor.ControlledAreaId = controlledArea.id;
+						return sensor;
+					});
 
-				Sensor.bulkCreate(sensors).then(function() {
-				  Sensor.find({where: {"ControlledAreaId": controlledArea.id}}).then(function(sensors) {
+					Sensor.bulkCreate(sensors).then(function() {
+						Sensor.find({where: {"ControlledAreaId": controlledArea.id}}).then(function(sensors) {
+						  	sensors = _.isArray(sensors) ? sensors : [sensors];
 
-				  	sensors = _.isArray(sensors) ? sensors : [sensors];
+						  	controlledArea.setSensors(sensors).then(function(){
+						  		controlledArea.getSensors().then(function(associatedSensors){
+						  			res.send("Ok");
+						  		});
+						  	});
+					  	});
+					});
 
-				  	controlledArea.setSensors(sensors).then(function(){
-				  		controlledArea.getSensors().then(function(associatedSensors){
-				  			res.send("Ok");
-				  		});
-				  	});
-				  	
-				  });
-				});
-			}else{
-				res.send("Ok");
-			}
-		});
-  	}
-  });
+				} else {
+					res.send("Ok");
+				}
+			});
+	  	} else {
+	  		res.send("Ok");
+	  	}
+  	});
 });
 
 /* update ControlledArea */
