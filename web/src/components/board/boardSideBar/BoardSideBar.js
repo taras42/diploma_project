@@ -23,7 +23,12 @@ define(function(require){
 
 			this.parentElement = options.parentElement ?  $(options.parentElement) : $('body');
 
-			this.addCAButton = new Item({itemTemplate: addCAButtonTemplate});
+			this.addCAButton = new Item({
+				itemTemplate: addCAButtonTemplate, 
+				model: new Backbone.Model({
+					title: "+"
+				})
+			});
 
 			this.controlledAreasCollection = options.controlledAreasCollection;
 

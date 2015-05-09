@@ -30,7 +30,7 @@ define(function (require) {
 		initialize: function(){
 			this.uploadView = new BoardCanvasUploadView({
 				parentElement: this.$el,
-				title: "Add CA Plan"
+				title: "+"
 			});
 
 			this.CAView = new BoardCanvasCAView({

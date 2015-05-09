@@ -60,6 +60,7 @@ define(function (require) {
 
 		show: function(){
 			this.$el.show();
+			this.setPosition();
 		},
 
 		hide: function(){

@@ -112,11 +112,10 @@ define(function(require){
 		},
 
 		_onItemEvent: function(e){
-			var itemId = this._getItemId(e);
+			var itemId = this._getItemId(e),
+				itemView = this._getItemByCID(itemId);
 
-			var itemView = this._getItemByCID(itemId);
-
-			var eventSufix = e.type === defaults.clickEvent ? ((itemView && itemView.model.get('action')) || defaults.eventSufix): e.type;
+			var eventSufix = e.type === defaults.clickEvent ? defaults.eventSufix : e.type;
 
 			itemView && this.trigger(this.eventPrefix + ":" + eventSufix, itemView, itemView.model);
 		},

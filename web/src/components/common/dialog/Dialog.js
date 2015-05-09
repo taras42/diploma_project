@@ -41,7 +41,7 @@ define(function(require){
 
             this.model = options.model;
             this.title = options.title || "";
-            var eventPrefix = "button";
+            this.eventPrefix = "button";
             this.modal = !_.isUndefined(options.modal) ? options.modal : false;
             this.parentContainer = options.parentContainer || 'body'
 
@@ -51,8 +51,7 @@ define(function(require){
             
             this.buttons = new ItemCollection({
                 items: options.buttons || defaultButton,
-                itemTemplate: buttonTemplate,
-                eventPrefix: eventPrefix
+                itemTemplate: buttonTemplate
             });
 
             this.isRendered = false;
@@ -60,10 +59,8 @@ define(function(require){
             this.additionalCssClass = options.additionalCssClass || ""
             this.contentTemplate = options.content;
 
-            _.each(options.buttons, function(buttonObj){
-                self.listenTo(self.buttons, eventPrefix +":"+ buttonObj.action, function(){
-                    self.trigger(eventPrefix +":"+ buttonObj.action, self, self.model);
-                });
+            this.listenTo(this.buttons, "item:selected", function(itemView, itemModel){
+                self.trigger(self.eventPrefix + ":" + itemModel.get("action"), self, self.model);
             });
             
             Backbone.View.apply(this, arguments);

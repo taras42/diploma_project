@@ -9,3 +9,16 @@
 	margin-left: -300px;
 	margin-top: -60px;
 }
+
+#mainBoard #boardToolbar .toolbarButtons{
+	width: 250px;
+	float: right;
+	height: 100%;
+	margin-right: 20px;
+}
+
+#mainBoard #boardToolbar .toolbarButton{
+	float: right;
+	height: 100%;
+	box-sizing: border-box;
+}

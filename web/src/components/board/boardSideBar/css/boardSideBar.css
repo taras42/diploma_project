@@ -27,9 +27,10 @@
 
 
 #mainBoard #boardSideBar .footer #addControlledArea{
-	margin-top: 12px;
+	margin-top: 5px;
 	position: relative;
 	font-weight: bold;
+	font-size: 25px;
 	display: block;
 }
 
