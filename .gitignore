@@ -1,5 +1,6 @@
 node_modules/
 web/src/lib/
+public/images/controlledAreas
 *.log
 bin/www
 config/config.json
