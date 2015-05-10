@@ -12,7 +12,7 @@ var _ = require('underscore');
 
 router.post('/', function(req, res) {
 	var controlledAreaObj = req.body,
-		imageName = utils.generateImageName(controlledArea.id, "png"),
+		imageName = utils.generateImageName("png"),
 		sensorsObjects = controlledAreaObj.sensors,
 		base64Data = controlledAreaObj.base64Image && utils.getBase64Data(controlledAreaObj.base64Image);
 		imagePath = settings.IMAGE_PATH + "/" + imageName;
@@ -29,8 +29,7 @@ router.post('/', function(req, res) {
 
 				if (sensorsObjects) {
 					var sensors = _.map(sensorsObjects, function(sensor){
-						sensor.ControlledAreaId = controlledArea.id;
-						return sensor;
+						return _.extend({}, sensor, {ControlledAreaId: controlledArea.id});
 					});
 
 					Sensor.bulkCreate(sensors).then(function() {
@@ -39,18 +38,24 @@ router.post('/', function(req, res) {
 
 							controlledArea.setSensors(sensors).then(function(){
 								controlledArea.getSensors().then(function(associatedSensors){
-									res.send("Ok");
+									var sensorsJSON = _.map(associatedSensors, function(sensor){
+										return sensor.toJSON();
+									});
+
+									var controlledAreaJSON = _.extend({}, controlledArea.toJSON(), {sensors: sensorsJSON});
+
+									res.send(controlledAreaJSON);
 								});
 							});
 						});
 					});
 
 				} else {
-					res.send("Ok");
+					res.send(controlledArea.toJSON());
 				}
 			});
 		} else {
-			res.send("Ok");
+			res.send(controlledArea.toJSON());
 		}
 	});
 });
