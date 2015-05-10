@@ -23,7 +23,7 @@ router.post('/', function(req, res) {
 		if (base64Data) {
 			fs.writeFile(path.resolve(settings.PUBLIC_FOLDER + imagePath), base64Data, 'base64', function(err) {
 				if (err) {
-					res.send("Error");
+					res.status(500).send(err);
 					return;	
 				}
 
