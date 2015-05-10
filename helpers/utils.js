@@ -1,5 +1,5 @@
 var chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
-	length = 15;
+	length = 16;
 
 function generateImageName(format) {
     var result = '';
