@@ -63,35 +63,12 @@ router.post('/', function(req, res) {
 /* update ControlledArea */
 
 router.put('/', function(req, res) {
-  var controlledAreaObj = req.body;
+	var controlledAreaObj = req.body,
+  		base64Data = controlledAreaObj.base64Image && utils.getBase64Data(controlledAreaObj.base64Image);
 
-  ControlledArea.find(controlledAreaObj.id).then(function(controlledArea){
-	var base64Data = controlledAreaObj.base64Image.replace(/^data:image\/png;base64,/, "");
-	
-	controlledArea.updateAttributes(_.omit(controlledAreaObj, ["base64Image", "sensors"])).then(function(){
-		// var sensors = _.map(controlledAreaObj.sensors, function(sensor){
-		// 	var sensor = Sensor.build(sensor);
-		// 	sensor.setControlledArea(controlledArea);
-		// 	sensor.save();
-		// 	return sensor;
-		// });
-
-		console.log(__dirname);
-
-		var imagePath = path.resolve("./public/images/controlledAreas/test.png");
-
-		fs.writeFile(imagePath, base64Data, 'base64', function(err) {
-			!err ? res.send(controlledArea) : res.send();
-		});
-
-		// Sensor.create(controlledAreaObj.sensors[0]).then(function(sensor){
-		// 	sensor.setControlledArea(controlledArea);
-		// 	controlledArea.addSensor(sensor).then(function(){
-				
-		// 	});
-		// });
+	ControlledArea.find(controlledAreaObj.id).then(function(controlledArea){
+		controlledArea.updateAttributes(_.omit(controlledAreaObj, ["base64Image", "sensors"])).then(function(){});
 	});
-  });
 });
 
 /* edit ControlledArea */
