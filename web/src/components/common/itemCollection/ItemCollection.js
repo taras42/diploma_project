@@ -76,6 +76,10 @@ define(function(require){
 			return itemView;
 		},
 
+		getItems: function(){
+			return this.itemsCollectionView;
+		},
+
 		findBy: function(criteria){
 			var criteriaKeys = _.pairs(criteria),
 				criteriaKeysLength  = criteriaKeys.length;
@@ -99,12 +103,21 @@ define(function(require){
 			// TODO		
 		},
 
-		resetCollection: function(){
+		resetCollection: function(items){
+			var self = this;
+
 			_.each(this.itemsCollectionView, function(itemView){
 				itemView.remove();
 			});
 
 			this.itemsCollectionView = [];
+
+			if(items){
+				_.each(items, function(item){
+					var model = new self.model(item); 
+					self.addItem(model);
+				});
+			}
 		},
 
 		renderItem: function(itemView){

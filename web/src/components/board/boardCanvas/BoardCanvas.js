@@ -75,13 +75,15 @@ define(function (require) {
 			this.gridOverlay.setTargetElement(CAView.$imageResource).buildGrid();
 			this.gridOverlay.render().show();
 
+			this.renderSensors();
+
 			this.trigger("canvas:ready", this, this.CAView);
 		},
 
 		showControlledArea: function(model){
 			var imageURL = model.get("image");
 
-			this.sensorsCollection.reset(model.get("sensors"));
+			this.sensorsCollection.resetCollection(model.get("sensors"));
 
 			this.uploadView.hide();
 			this.CAView.hide();
@@ -115,7 +117,16 @@ define(function (require) {
 		},
 
 		renderSensors: function(){
-			
+			var self = this;
+
+			_.each(this.sensorsCollection.getItems(), function(sensorView, index){
+				_.each(self.gridOverlay.getCells(), function(cellView, index){
+					if((sensorView.model.get("x") === cellView.model.get("x")) && 
+						(sensorView.model.get("y") === cellView.model.get("y"))){
+						cellView.$el.append(sensorView.render().$el);
+					}
+				});
+			});
 		},
 
 		findSensorByCoordinates: function(coordinates){

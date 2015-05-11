@@ -130,6 +130,10 @@ define(function(require){
             this.trigger("cell:dblclick", cellView, model, coordinates);
         },
 
+        getCells: function(){
+            return this.cellsCollection.getItems();
+        },
+
         show: function(){
             this.$el.show();
         },
