@@ -81,6 +81,8 @@ define(function (require) {
 		showControlledArea: function(model){
 			var imageURL = model.get("image");
 
+			this.sensorsCollection.reset(model.get("sensors"));
+
 			this.uploadView.hide();
 			this.CAView.hide();
 			this.gridOverlay.hide();
@@ -110,6 +112,10 @@ define(function (require) {
 			this.trigger("sensor:added", sensorView);
 
 			this.addSensorDialog.hide();
+		},
+
+		renderSensors: function(){
+			
 		},
 
 		findSensorByCoordinates: function(coordinates){

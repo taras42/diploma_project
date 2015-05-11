@@ -29,11 +29,11 @@ router.post('/', function(req, res) {
 
 				if (sensorsObjects) {
 					var sensors = _.map(sensorsObjects, function(sensor){
-						return _.extend({}, sensor, {ControlledAreaId: controlledArea.id});
+						return _.extend({}, sensor, {controlledAreaId: controlledArea.id});
 					});
 
 					Sensor.bulkCreate(sensors).then(function() {
-						Sensor.find({where: {"ControlledAreaId": controlledArea.id}}).then(function(sensors) {
+						Sensor.find({where: {"controlledAreaId": controlledArea.id}}).then(function(sensors) {
 							sensors = _.isArray(sensors) ? sensors : [sensors];
 
 							controlledArea.setSensors(sensors).then(function(){

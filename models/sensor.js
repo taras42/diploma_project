@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        this.belongsTo(models.ControlledArea, {as: "ControlledArea"})
+        this.belongsTo(models.ControlledArea, {as: "controlledArea"})
       }
     }
   });
