@@ -50,6 +50,7 @@ define(function(require){
 			this.listenTo(this.boardToolbar, "button:save", _.bind(this._onToolbarSave, this));
 			this.listenTo(this.boardCanvas, "sensor:added", _.bind(this._onSensorAdded, this));
 			this.listenTo(this.boardCanvas, "canvas:ready", _.bind(this._onCanvasReady, this));
+			this.listenTo(this.boardCanvas, "canvas:preview", _.bind(this._onCanvasPreview, this));
 
 			this.socket.on("connect", function(){
 				console.log('connected');
@@ -82,6 +83,10 @@ define(function(require){
 
 		_onCanvasReady: function(canvas, CAView){
 			this.selectedControlledArea.model.set("base64Image", CAView.imageBase64);
+		},
+
+		_onCanvasPreview: function(canvas, CAView){
+			this.selectedControlledArea.model.set("blobSrc", CAView.blobSrc);
 		},
 
 		_onItemSelect: function(sideBar, itemView){

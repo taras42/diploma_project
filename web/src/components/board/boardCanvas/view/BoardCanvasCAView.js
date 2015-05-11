@@ -19,6 +19,7 @@ define(function (require) {
 			this.parentElement = options.parentElement ?  $(options.parentElement) : $('body');
 			this.fileReader = new FileReader();
 			this.imageBase64 = "";
+			this.blobSrc = "";
 			this.$imageResource = this.$el.find('.imageResource');
 
 			this.initEvents();
@@ -38,6 +39,7 @@ define(function (require) {
 			}else{
 				this.fileReader.readAsDataURL(resource);
 				src = this.createObjectURL(resource);
+				this.blobSrc = src;
 			}
 			
 			this.$imageResource.attr("src", src);

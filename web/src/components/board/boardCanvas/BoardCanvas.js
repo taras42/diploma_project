@@ -81,27 +81,35 @@ define(function (require) {
 		},
 
 		showControlledArea: function(model){
-			var imageURL = model.get("image");
+			var imageURL = model.get("image"),
+				blobSrc = model.get("blobSrc"),
+				src = imageURL || blobSrc;
 
 			this.sensorsCollection.resetCollection(model.get("sensors"));
 
-			this.uploadView.hide();
-			this.CAView.hide();
-			this.gridOverlay.hide();
+			this.hide();
 
-			imageURL ? this.CAView.setImageResource(imageURL).show() : this.uploadView.show();
+			src ? this.CAView.setImageResource(src).show() : this.uploadView.show();
 		},
 
 		previewControlledArea: function(uploadView){
 			this.uploadView.hide();
 			this.CAView.setImageResource(uploadView.$uploadInput[0].files[0]).show();
 			uploadView.resetUploadInput();
+
+			this.trigger("canvas:preview", this, this.CAView);
 		},
 
 		show: function(){
 			this.uploadView.render();
 			this.CAView.render();
 			this.$el.show();
+		},
+
+		hide: function(){
+			this.uploadView.hide();
+			this.CAView.hide();
+			this.gridOverlay.hide();
 		},
 
 		addSensor: function(dialog, model){

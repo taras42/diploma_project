@@ -19,7 +19,7 @@ router.post('/', function(req, res) {
 
 	controlledAreaObj.image = base64Data && imagePath;
   
-	ControlledArea.create(_.omit(controlledAreaObj, ["base64Image", "sensors"])).then(function(controlledArea){
+	ControlledArea.create(_.omit(controlledAreaObj, ["base64Image", "sensors", "blobSrc"])).then(function(controlledArea){
 		if (base64Data) {
 			fs.writeFile(path.resolve(settings.PUBLIC_FOLDER + imagePath), base64Data, 'base64', function(err) {
 				if (err) {
@@ -67,7 +67,7 @@ router.put('/', function(req, res) {
   		base64Data = controlledAreaObj.base64Image && utils.getBase64Data(controlledAreaObj.base64Image);
 
 	ControlledArea.find(controlledAreaObj.id).then(function(controlledArea){
-		controlledArea.updateAttributes(_.omit(controlledAreaObj, ["base64Image", "sensors"])).then(function(){});
+		controlledArea.updateAttributes(_.omit(controlledAreaObj, ["base64Image", "sensors", "blobSrc"])).then(function(){});
 	});
 });
 

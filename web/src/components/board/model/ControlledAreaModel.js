@@ -7,6 +7,7 @@ define(function(require){
 		defaults: {
 			image: "",
 			base64Image: "",
+			blobSrc: "",
 			description: "",
 			title: "",
 			sensors: []
