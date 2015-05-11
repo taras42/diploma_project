@@ -42,6 +42,11 @@ define(function (require) {
 			
 			this.$imageResource.attr("src", src);
 
+			if (this.$imageResource[0].complete) {
+				this.show();
+      			this.$imageResource.load();
+    		}
+
 			return this;
 		},
 
