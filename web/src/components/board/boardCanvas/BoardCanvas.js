@@ -66,6 +66,8 @@ define(function (require) {
 			this.listenTo(this.uploadView, "upload:change", this.previewControlledArea);
 			this.listenTo(this.CAView, "image:loaded", this.buildGridOverlay);
 			this.listenTo(this.gridOverlay, "cell:dblclick", this.openAddSensorDialog);
+			this.listenTo(this.gridOverlay, "cell:mouseenter cell:mouseleave", this.toggleCellStyle);
+			
 
 			this.listenTo(this.addSensorDialog, "button:add", this.addSensor);
 			this.listenTo(this.addSensorDialog, "button:cancel", this.closeAddSensorDialog);
@@ -122,6 +124,10 @@ define(function (require) {
 			this.trigger("sensor:added", sensorView);
 
 			this.addSensorDialog.hide();
+		},
+
+		toggleCellStyle: function(cellView, cellModel) {
+			cellView.$el.toggleClass("hovered");
 		},
 
 		renderSensors: function(){

@@ -2,7 +2,7 @@
 	float: right;
 	height: 100%;
 	width: 100%;
-	background-color: #2E2E30;
+	background-color: #F2F0F0;
 	border-left: 1px solid #494949;
 	border-top: 1px solid #494949;
 	overflow: auto;
@@ -20,7 +20,7 @@
 }
 
 #mainBoard #boardCanvas .fileUpload span{
-	font-size: 60px;	
+	font-size: 22px;	
 }
 
 #mainBoard #boardCanvas .fileUpload input.upload {
@@ -55,12 +55,21 @@
 }
 
 #mainBoard .boardCanvasDialog input.control.text {
-	width: 310px;
+	width: 285px;
 }
 
 .grid .sensor{
 	width: 100%;
 	height: 100%;
-	background-color: red;
+	background-color: #BD2B2B;
 	border-radius: 50%;	
+}
+
+.grid .sensor:hover {
+	opacity: 0.5;
+}
+
+.grid .item.hovered{
+	background-color: gray;
+	opacity: 0.5;
 }

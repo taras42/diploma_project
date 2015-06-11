@@ -1,7 +1,7 @@
 #mainBoard {
 	height: 100%;
 	width: 100%;
-	background-color: #B6B6B6;
+	background-color: #F2F0F0;
 	position: absolute;
 }
 
@@ -16,7 +16,7 @@
 }
 
 .boardSideBarDialog input.control.text{
-	width: 310px;
+	width: 285px;
 }
 
 .boardSideBarDialog span.caption{

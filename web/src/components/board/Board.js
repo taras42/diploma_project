@@ -99,7 +99,7 @@ define(function(require){
 		},
 
 		_onToolbarSave: function(toolbar, buttonView){
-			this.selectedControlledArea.model.save().done(function(data){
+			this.selectedControlledArea && this.selectedControlledArea.model.save().done(function(data){
 				console.log(data);
 			}).fail(function(error){
 				console.log(error);

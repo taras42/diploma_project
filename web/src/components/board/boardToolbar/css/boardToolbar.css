@@ -1,6 +1,6 @@
 #mainBoard #boardToolbar {
 	height: 60px;
-	background-color: #2E2E30;
+	background-color: #F2F0F0;
 	box-sizing: border-box;
     -moz-box-sizing: border-box; 
     -ms-box-sizing: border-box
@@ -11,14 +11,17 @@
 }
 
 #mainBoard #boardToolbar .toolbarButtons{
-	width: 250px;
 	float: right;
 	height: 100%;
-	margin-right: 20px;
 }
 
 #mainBoard #boardToolbar .toolbarButton{
 	float: right;
 	height: 100%;
+	background-color: #F2F0F0;	
 	box-sizing: border-box;
+}
+
+#mainBoard #boardToolbar .search input{
+	width: 257px;
 }

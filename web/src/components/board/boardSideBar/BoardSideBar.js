@@ -10,7 +10,8 @@ define(function(require){
 		boardSideBarTemplate = require("text!components/board/boardSideBar/template/boardSideBarTemplate.htm"),
 		controlledAreaItemTemplate = require("text!components/board/boardSideBar/template/controlledAreaItemTemplate.htm"),
 		addCAButtonTemplate = require("text!components/board/boardSideBar/template/addCAButtonTemplate.htm"),
-		addCADialogTemplate = require("text!components/board/boardSideBar/template/addCADialogTemplate.htm");
+		addCADialogTemplate = require("text!components/board/boardSideBar/template/addCADialogTemplate.htm"),
+		headerTemplate = require("text!components/board/boardSideBar/template/boardSideBarHeaderTemplate.htm");
 
 	require('css!components/board/boardSideBar/css/boardSideBar.css');
 
@@ -122,6 +123,7 @@ define(function(require){
 		},
 
 		render: function(){
+			this.header.append(headerTemplate);
 			this.content.append(this.controlledAreasViewCollection.render().$el);
 			this.footer.append(this.addCAButton.render().$el);
 

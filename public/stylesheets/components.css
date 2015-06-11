@@ -16,7 +16,7 @@
 .dialog{
 	position: absolute;
 	z-index: 9000;
-	background-color: #2E2F31;
+	background-color: #F2F0F0;
 	width: 400px;  	
 }
 
@@ -55,19 +55,27 @@
 
 .caption{
 	font-weight: bold;
-	color: white;
+	color: #1C1C1C;
 }
+
 
 /* ----------------------------- || ---------------------------------- */
 
 /* ----------------------------- Buttons ----------------------------- */
 
 .button{
-	padding: 5px;
+	padding: 10px;
+	margin-left: 10px;
 	display: inline;
-	color: #23A96E;
+	color: #1C1C1C;
 	cursor: pointer;
 	font-weight: bold;
+	background-color: #CFCFCF;
+}
+
+.button:hover {
+  background-color: gray !important;
+  color: white;
 }
 
 /* ----------------------------- || ---------------------------------- */
@@ -79,13 +87,15 @@
 }
 
 .text{
-	margin: 5px;
-	font-weight: bold;
-	background-color: #B6B6B6;
-	padding: 5px;
-	color: #2E2E30;
-	border: 0;
+	padding: 10px;
+	margin: 10px;
+	width: 200px;
+	font-size: 15px;
 }
 
 
 /* ----------------------------- || ---------------------------------- */
+
+/*
+ green - #CFD01E;
+*/

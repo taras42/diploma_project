@@ -25,10 +25,24 @@ define(function(require){
 				additionalCssClass: "toolbarButtons",
 				itemAdditionalCssClass: "toolbarButton button",
 				itemTemplate: boardToolbarButtonTemplate,
-				items: [{
-					title: "Save",
-					action: "save"
-				}]
+				items: [
+					{
+						title: "Delete",
+						action: "delete"
+					},
+					{
+						title: "Save",
+						action: "save"
+					},
+					{
+						title: "Settings",
+						action: "settings"
+					},
+					{
+						title: "Statistics",
+						action: "statistics"
+					}
+				]
 			});
 
 			this.initEvents();

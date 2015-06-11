@@ -46,6 +46,8 @@ define(function(require){
 
         initEvents: function() {
             this.listenTo(this.cellsCollection, "item:dblclick", this.onCellDblClick);
+            this.listenTo(this.cellsCollection, "item:mouseenter", this.onCellMouseEnter);
+            this.listenTo(this.cellsCollection, "item:mouseleave", this.onCellMouseLeave);
         },
 
         buildGrid: function(){
@@ -128,6 +130,14 @@ define(function(require){
             coordinates.y = cellView.$el.children(".gridCell").data("y");
             
             this.trigger("cell:dblclick", cellView, model, coordinates);
+        },
+
+        onCellMouseEnter: function(cellView, model) {
+            this.trigger("cell:mouseenter", cellView, model);
+        },
+
+        onCellMouseLeave: function(cellView, model) {
+            this.trigger("cell:mouseleave", cellView, model);
         },
 
         getCells: function(){
